@@ -1,5 +1,7 @@
 """
-Import google spreadsheet library and Credentials
+This is a simple game to find a word in a grid among random characters.
+#
+Import google spreadsheet library, Credentials and other libraries
 """
 import gspread
 from google.oauth2.service_account import Credentials
