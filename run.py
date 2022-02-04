@@ -51,6 +51,7 @@ class Grid:
         # Grid size
         self.length = length
         self.filler = filler
+        self.any_grid = []
 
     def create_grid(self):
         """
@@ -64,6 +65,18 @@ class Grid:
                 base_grid[x_cord, y_cord] = random.choice(self.filler)
 
         return base_grid
+
+    def display(self, input_grid):
+        """
+        Unpack lists to display grid in a bare format
+        """
+        self.any_grid = input_grid
+        for x_cord in range(self.length):
+            row = ""
+            for y_cord in range(self.length):
+                row += self.any_grid[x_cord, y_cord] + " "
+            print(row)
+        print("\n")
 
 
 def main():
@@ -80,6 +93,7 @@ def testing():
     """
     Testing for development
     """
+    # Test section to create base grid for puzzel and answer
     grid_size = 6
     grid = Grid(grid_size, "-")
     answer_grid = grid.create_grid()
@@ -87,6 +101,9 @@ def testing():
     grid.filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     puzzle_grid = grid.create_grid()
     print(puzzle_grid)
+    # Test section to print grid
+    grid.display(answer_grid)
+    grid.display(puzzle_grid)
 
 
 testing()
