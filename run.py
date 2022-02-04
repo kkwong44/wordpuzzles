@@ -117,6 +117,31 @@ class ModifyGrid:
 
         return self.puzzle_grid, self.answer_grid
 
+    def get_answer(self):
+        """
+        Ask and check player's answer. Three attempts are allow for each game.
+        """
+        word = self.add_word[0]
+        wordsize = len(word)
+        for attempt in range(3):
+            if attempt == 0:
+                print(f"Can you find my {wordsize} letters word in the table?")
+                print("It can be horizonal, vertical and spelled backwards.\n")
+
+            answer = input("Enter your answer here: ").upper()
+            if answer == word:
+                print("Well Done! You've found my word.\n")
+                break
+            elif attempt == 0:
+                print(f"\n'{answer}' is not the word that I'm looking for.")
+                print(f"You got {2-attempt} attempts left.\n")
+            elif attempt == 1:
+                print(f"\n'{answer}' is not the word that I'm looking for.")
+                print(f"You got {2-attempt} attempt left.\n")
+            else:
+                print(f"\n'{answer}' is not the word that I'm looking for.")
+                print(f"The word is '{word}'\n")
+
 
 def main():
     """
@@ -151,6 +176,9 @@ def testing():
     print(new_grids.answer_grid)
     grid.display(answer_grid)
     grid.display(puzzle_grid)
+    # Test section to ask and check answer
+    new_grids.get_answer()
+    grid.display(answer_grid)
 
 
 testing()
