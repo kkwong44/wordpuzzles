@@ -79,6 +79,45 @@ class Grid:
         print("\n")
 
 
+class ModifyGrid:
+    """
+    Randomly decide the direction to insert the word.
+    It can be Left-right, Right-Left, Up-Down or Down_Up
+    """
+    def __init__(self, puzzle_grid, answer_grid, add_word):
+        self.puzzle_grid = puzzle_grid
+        self.answer_grid = answer_grid
+        self.add_word = add_word
+
+    def insert_word(self):
+        """
+        Workout the direction and randomly choose a position to insert
+        the word. The position must fit the entire word and it need to
+        be the same for both puzzle and answer grids.
+        """
+        gridsize = len(self.puzzle_grid)
+        wordsize = len(self.add_word[0])
+        downward = random.randint(0, 1)
+        reverse = random.randint(0, 1)
+        word = self.add_word[0]
+
+        if reverse == 1:
+            word = word[::-1]
+        x_cord = random.randint(0, gridsize - 1)
+        y_cord = random.randint(0, gridsize - wordsize)
+
+        for letter in word:
+            if downward == 0:
+                self.puzzle_grid[x_cord, y_cord] = letter
+                self.answer_grid[x_cord, y_cord] = letter
+            else:
+                self.puzzle_grid[y_cord, x_cord] = letter
+                self.answer_grid[y_cord, x_cord] = letter
+            y_cord += 1
+
+        return self.puzzle_grid, self.answer_grid
+
+
 def main():
     """
     Main section to run program
@@ -102,6 +141,14 @@ def testing():
     puzzle_grid = grid.create_grid()
     print(puzzle_grid)
     # Test section to print grid
+    grid.display(answer_grid)
+    grid.display(puzzle_grid)
+    # Test section to insert word to grid
+    word = ["TEST"]
+    new_grids = ModifyGrid(puzzle_grid, answer_grid, word)
+    new_grids.insert_word()
+    print(new_grids.puzzle_grid)
+    print(new_grids.answer_grid)
     grid.display(answer_grid)
     grid.display(puzzle_grid)
 
