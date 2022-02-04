@@ -127,19 +127,26 @@ class ModifyGrid:
             if attempt == 0:
                 print(f"Can you find my {wordsize} letters word in the table?")
                 print("It can be horizonal, vertical and spelled backwards.\n")
-
+            # Get answer from player
             answer = input("Enter your answer here: ").upper()
             if answer == word:
                 print("Well Done! You've found my word.\n")
                 break
-            elif attempt == 0:
-                print(f"\n'{answer}' is not the word that I'm looking for.")
-                print(f"You got {2-attempt} attempts left.\n")
-            elif attempt == 1:
-                print(f"\n'{answer}' is not the word that I'm looking for.")
-                print(f"You got {2-attempt} attempt left.\n")
+            # Use appropriate message for incorect answer
+            if wordsize > len(answer):
+                print(f"\nYour answer '{answer}' is too short.")
+                print(f"It is a {wordsize} letters word.")
+            elif wordsize < len(answer):
+                print(f"\nYour answer '{answer}' is too long.")
+                print(f"It is a {wordsize} letters word.")
             else:
                 print(f"\n'{answer}' is not the word that I'm looking for.")
+            # Message to indicate number of attemps left in the game
+            if attempt == 0:
+                print(f"You have {2-attempt} attempts left.\n")
+            elif attempt == 1:
+                print(f"You have {2-attempt} attempt left.\n")
+            else:
                 print(f"The word is '{word}'\n")
 
 
