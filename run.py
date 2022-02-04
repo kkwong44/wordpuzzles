@@ -91,21 +91,21 @@ class ModifyGrid:
 
     def insert_word(self):
         """
-        Workout the direction and randomly choose a position to insert
+        Work out the direction and randomly choose a position to insert
         the word. The position must fit the entire word and it need to
         be the same for both puzzle and answer grids.
         """
         gridsize = len(self.puzzle_grid)
-        wordsize = len(self.add_word[0])
+        word = self.add_word[0]
+        wordsize = len(word)
         downward = random.randint(0, 1)
         reverse = random.randint(0, 1)
-        word = self.add_word[0]
-
+        # Compute random position and direction
         if reverse == 1:
             word = word[::-1]
         x_cord = random.randint(0, gridsize - 1)
         y_cord = random.randint(0, gridsize - wordsize)
-
+        # Insert word into grid horizontally or vertically
         for letter in word:
             if downward == 0:
                 self.puzzle_grid[x_cord, y_cord] = letter
