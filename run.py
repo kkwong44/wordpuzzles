@@ -96,7 +96,7 @@ class ModifyGrid:
         be the same for both puzzle and answer grids.
         """
         gridsize = len(self.puzzle_grid)
-        word = self.add_word[0]
+        word = self.add_word
         wordsize = len(word)
         downward = random.randint(0, 1)
         reverse = random.randint(0, 1)
@@ -124,7 +124,7 @@ class ModifyGrid:
         """
         Ask and check player's answer. Three attempts are allow for each game.
         """
-        word = self.add_word[0]
+        word = self.add_word
         wordsize = len(word)
         for attempt in range(3):
             if attempt == 0:
@@ -179,7 +179,7 @@ def testing():
     grid.display(answer_grid)
     grid.display(puzzle_grid)
     # Test section to insert word to grid
-    word = ["TEST"]
+    word = "TEST"
     new_grids = ModifyGrid(puzzle_grid, answer_grid, word)
     new_grids.insert_word()
     print(new_grids.puzzle_grid)
