@@ -105,8 +105,8 @@ class ModifyGrid:
         be the same for both puzzle and answer grids.
         """
         gridsize = len(self.puzzle_grid)
-        word = self.add_word
-        wordsize = len(word)
+        word = self.add_word.get("name")
+        wsize = len(word)
         downward = random.randint(0, 1)
         reverse = random.randint(0, 1)
         # Compute random position and direction
@@ -114,7 +114,7 @@ class ModifyGrid:
             word = word[::-1]
         x_cord = random.randint(0, gridsize - 1)
         try:
-            y_cord = random.randint(0, gridsize - wordsize)
+            y_cord = random.randint(0, gridsize - wsize)
         except (ValueError, TypeError):
             return True
         else:
@@ -133,33 +133,38 @@ class ModifyGrid:
         """
         Ask and check player's answer. Three attempts are allow for each game.
         """
-        word = self.add_word
-        wordsize = len(word)
+        word = self.add_word.get("name")
+        wtype = self.add_word.get("type")
+        wsize = len(word)
         for attempt in range(3):
             if attempt == 0:
-                print(f"Can you find my {wordsize} letters word in the table?")
+                str1 = f"Can you find my {wsize} letters "
+                str2 = f"'{wtype}' in the table?"
+                print(str1 + str2)
                 print("It can be horizonal, vertical and spelled backwards.\n")
             # Get answer from player
             answer = input("Enter your answer here: ").upper()
             if answer == word:
-                print("Well Done! You've found my word.\n")
+                print(f"Well Done! You've found my word '{word}'.\n")
                 break
             # Use appropriate message for incorect answer
-            if wordsize > len(answer):
+            if wsize > len(answer):
                 print(f"\nYour answer '{answer}' is too short.")
-                print(f"It is a {wordsize} letters word.")
-            elif wordsize < len(answer):
+                print(f"'{wtype}' with ({wsize}) letters.\n")
+            elif wsize < len(answer):
                 print(f"\nYour answer '{answer}' is too long.")
-                print(f"It is a {wordsize} letters word.")
+                print(f"'{wtype}' with ({wsize}) letters.\n")
             else:
-                print(f"\n'{answer}' is not the word that I'm looking for.")
+                str1 = f"\n'{answer}' is not the "
+                str2 = f"'{wtype}' that I'm looking for.\n"
+                print(str1 + str2)
             # Message to indicate number of attemps left in the game
             if attempt == 0:
                 print(f"You have {2-attempt} attempts left.\n")
             elif attempt == 1:
                 print(f"You have {2-attempt} attempt left.\n")
             else:
-                print(f"The word is '{word}'\n")
+                print(f"The {wtype} is '{word}'\n")
 
 
 def main():
@@ -188,7 +193,7 @@ def testing():
     grid.display(answer_grid)
     grid.display(puzzle_grid)
     # Test section to insert word to grid
-    word = "TEST"
+    word = {"type": "Animal Name", "name": "TEST", "length": 4}
     new_grids = ModifyGrid(puzzle_grid, answer_grid, word)
     new_grids.insert_word()
     print(new_grids.puzzle_grid)
@@ -200,7 +205,8 @@ def testing():
     grid.display(answer_grid)
 
 
-# testing()
+testing()
+
 
 def test2():
     """
@@ -217,4 +223,4 @@ def test2():
         print(word_type, word_name, word_length)
 
 
-test2()
+# test2()
