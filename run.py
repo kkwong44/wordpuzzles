@@ -104,18 +104,21 @@ class ModifyGrid:
         if reverse == 1:
             word = word[::-1]
         x_cord = random.randint(0, gridsize - 1)
-        y_cord = random.randint(0, gridsize - wordsize)
-        # Insert word into grid horizontally or vertically
-        for letter in word:
-            if downward == 0:
-                self.puzzle_grid[x_cord, y_cord] = letter
-                self.answer_grid[x_cord, y_cord] = letter
-            else:
-                self.puzzle_grid[y_cord, x_cord] = letter
-                self.answer_grid[y_cord, x_cord] = letter
-            y_cord += 1
-
-        return self.puzzle_grid, self.answer_grid
+        try:
+            y_cord = random.randint(0, gridsize - wordsize)
+        except (ValueError, TypeError):
+            return True
+        else:
+            # Insert word into grid horizontally or vertically
+            for letter in word:
+                if downward == 0:
+                    self.puzzle_grid[x_cord, y_cord] = letter
+                    self.answer_grid[x_cord, y_cord] = letter
+                else:
+                    self.puzzle_grid[y_cord, x_cord] = letter
+                    self.answer_grid[y_cord, x_cord] = letter
+                y_cord += 1
+            return self.puzzle_grid, self.answer_grid
 
     def get_answer(self):
         """
