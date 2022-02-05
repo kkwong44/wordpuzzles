@@ -42,6 +42,15 @@ class ImportSheet():
 
         return word_prop
 
+    def all_into_dict(self):
+        """
+        Import all values from worksheet into dictionary
+        """
+        sheet = SHEET.worksheet(self.sheet)
+        words_in_dict = sheet.get_all_records()
+
+        return words_in_dict
+
 
 class Grid:
     """
@@ -191,4 +200,21 @@ def testing():
     grid.display(answer_grid)
 
 
-testing()
+# testing()
+
+def test2():
+    """
+    Test Import to dictionary
+    """
+    import_list = ImportSheet("words")
+    word_dict = import_list.all_into_dict()
+    for i in range(100):
+        row_id = random.randint(1, len(word_dict)-1)
+        word_prop = word_dict[row_id]
+        word_type = word_prop.get("type")
+        word_name = word_prop.get("name")
+        word_length = word_prop.get("length")
+        print(word_type, word_name, word_length)
+
+
+test2()
