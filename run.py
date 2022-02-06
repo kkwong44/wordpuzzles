@@ -85,7 +85,7 @@ class Grid:
             for y_cord in range(self.length):
                 row += self.any_grid[x_cord, y_cord] + " "
             print(row)
-        print("\n")
+        print()
 
 
 class ModifyGrid:
@@ -129,7 +129,7 @@ class ModifyGrid:
                 y_cord += 1
             return self.puzzle_grid, self.answer_grid
 
-    def get_answer(self):
+    def get_answer(self, grid):
         """
         Ask and check player's answer. Three attempts are allow for each game.
         """
@@ -158,6 +158,7 @@ class ModifyGrid:
                 str1 = f"\n'{answer}' is not the "
                 str2 = f"'{wtype}' that I'm looking for.\n"
                 print(str1 + str2)
+            grid.display(self.puzzle_grid)
             # Message to indicate number of attemps left in the game
             if attempt == 0:
                 print(f"You have {2-attempt} attempts left.\n")
@@ -201,7 +202,7 @@ def testing():
     grid.display(answer_grid)
     grid.display(puzzle_grid)
     # Test section to ask and check answer
-    new_grids.get_answer()
+    new_grids.get_answer(grid)
     grid.display(answer_grid)
 
 
