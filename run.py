@@ -177,16 +177,14 @@ class Game:
         self.grid_size = grid_size
         self.answer_grid = None
         self.puzzle_grid = None
-        self.word_dict = None
         self.grid = None
         self.import_list = ImportSheet("words")
+        self.word_dict = self.import_list.all_into_dict()
 
     def initialise(self):
         """
         Initialise grids for each game
         """
-        # Import words from sheet and get a random word from dictionary
-        self.word_dict = self.import_list.all_into_dict()
         # Create base grids
         self.grid = Grid(self.grid_size, "-")
         self.answer_grid = self.grid.create_grid()
