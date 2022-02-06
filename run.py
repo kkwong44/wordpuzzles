@@ -168,29 +168,52 @@ class ModifyGrid:
                 print(f"The {wtype} is '{word}'\n")
 
 
+class Game:
+    """
+    Puzzle game to find a word in a 2 dimensions grid
+    """
+    def __init__(self, grid_size):
+        self.grid_size = grid_size
+        self.answer_grid = None
+        self.puzzle_grid = None
+        self.word_dict = None
+        self.grid = None
+        self.import_list = ImportSheet("words")
+
+    def initialise(self):
+        """
+        Initialise grids for each game
+        """
+        # Import words from sheet and get a random word from dictionary
+        self.word_dict = self.import_list.all_into_dict()
+        # Create base grids
+        self.grid = Grid(self.grid_size, "-")
+        self.answer_grid = self.grid.create_grid()
+        self.grid.filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        self.puzzle_grid = self.grid.create_grid()
+
+    def play_puzzle(self):
+        """
+        Create puzzel game for player to play
+        """
+        row_id = random.randint(1, len(self.word_dict)-1)
+        word_prop = self.word_dict[row_id]
+        # Insert word to grid
+        new_grids = ModifyGrid(self.puzzle_grid, self.answer_grid, word_prop)
+        new_grids.insert_word()
+        self.grid.display(self.puzzle_grid)
+        # Ask and check answer
+        new_grids.get_answer(self.grid)
+        self.grid.display(self.answer_grid)
+
+
 def main():
     """
     Main section to run program
     """
-    # Import words from sheet and get a random word from dictionary
-    import_list = ImportSheet("words")
-    word_dict = import_list.all_into_dict()
-    row_id = random.randint(1, len(word_dict)-1)
-    word_prop = word_dict[row_id]
-    # Create base grids
-    grid_size = 6
-    grid = Grid(grid_size, "-")
-    answer_grid = grid.create_grid()
-    grid.filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    puzzle_grid = grid.create_grid()
-    # Insert word to grid
-    new_grids = ModifyGrid(puzzle_grid, answer_grid, word_prop)
-    new_grids.insert_word()
-    grid.display(puzzle_grid)
-    # Ask and check answer
-    new_grids.get_answer(grid)
-    grid.display(answer_grid)
-    new_grids = ModifyGrid(puzzle_grid, answer_grid, word_prop)
+    game = Game(6)
+    game.initialise()
+    game.play_puzzle()
 
 
 main()
