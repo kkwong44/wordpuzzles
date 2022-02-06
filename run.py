@@ -145,10 +145,10 @@ class ModifyGrid:
             # Get answer from player
             answer = input("Enter your answer here: ").upper()
             if answer == word:
-                print(f"Well Done! You've found my word '{word}'.\n")
+                print(f"\nWell Done! You've found my word '{word}'.\n")
                 break
             # Use appropriate message for incorect answer
-            if wsize > len(answer):
+            if wsize > len(answer) and attempt < 2:
                 print(f"\nYour answer '{answer}' is too short.")
                 print(f"'{wtype}' with ({wsize}) letters.\n")
             elif wsize < len(answer):
@@ -158,14 +158,15 @@ class ModifyGrid:
                 str1 = f"\n'{answer}' is not the "
                 str2 = f"'{wtype}' that I'm looking for.\n"
                 print(str1 + str2)
-            grid.display(self.puzzle_grid)
             # Message to indicate number of attemps left in the game
             if attempt == 0:
+                grid.display(self.puzzle_grid)
                 print(f"You have {2-attempt} attempts left.\n")
             elif attempt == 1:
+                grid.display(self.puzzle_grid)
                 print(f"You have {2-attempt} attempt left.\n")
             else:
-                print(f"The {wtype} is '{word}'\n")
+                print(f"ANSWER: The {wtype} is '{word}'\n")
 
 
 class Game:
