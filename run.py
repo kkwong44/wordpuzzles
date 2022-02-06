@@ -213,8 +213,14 @@ def main():
     Main section to run program
     """
     game = Game(6)
-    game.initialise()
-    game.play_puzzle()
+    while True:
+        game.initialise()
+        game.play_puzzle()
+        answer = input("Do you want to play another game (y/n)? ").upper()
+        print()
+        if answer == "N":
+            print("Thank you for playing!\n")
+            break
 
 
 main()
