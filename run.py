@@ -81,7 +81,7 @@ class Grid:
         """
         self.any_grid = input_grid
         for x_cord in range(self.length):
-            row = ""
+            row = "      "
             for y_cord in range(self.length):
                 row += self.any_grid[x_cord, y_cord] + " "
             print(row)
@@ -138,35 +138,34 @@ class ModifyGrid:
         wsize = len(word)
         for attempt in range(3):
             if attempt == 0:
-                str1 = f"Can you find my {wsize} letters "
-                str2 = f"'{wtype}' in the table?"
+                str1 = f' > Can you find "{wtype}" with ({wsize}) '
+                str2 = "letter in the table?"
                 print(str1 + str2)
-                print("It can be horizonal, vertical and spelled backwards.\n")
             # Get answer from player
-            answer = input("Enter your answer here: ").upper()
+            answer = input(" > Enter your answer here: ").upper()
             if answer == word:
-                print(f"\nWell Done! You've found my word '{word}'.\n")
+                print(f'\n > Well Done! You have found the word "{word}".\n')
                 break
             # Use appropriate message for incorect answer
             if wsize > len(answer) and attempt < 2:
-                print(f"\nYour answer '{answer}' is too short.")
-                print(f"'{wtype}' with ({wsize}) letters.\n")
+                print(f'\n > Your answer "{answer}" is too short.\n')
+                # print(f' "{wtype}" with ({wsize}) letters.\n')
             elif wsize < len(answer):
-                print(f"\nYour answer '{answer}' is too long.")
-                print(f"'{wtype}' with ({wsize}) letters.\n")
+                print(f'\n > Your answer "{answer}" is too long.\n')
+                # print(f' "{wtype}" with ({wsize}) letters.\n')
             else:
-                str1 = f"\n'{answer}' is not the "
-                str2 = f"'{wtype}' that I'm looking for.\n"
-                print(str1 + str2)
+                print(f'\n > Wrong Answer: "{answer}" is not the word. \n')
             # Message to indicate number of attemps left in the game
             if attempt == 0:
+                print(f'      "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f"You have {2-attempt} attempts left.\n")
+                print(f' > You have {2-attempt} attempts left.')
             elif attempt == 1:
+                print(f'      "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f"You have {2-attempt} attempt left.\n")
+                print(f' > You have {2-attempt} attempt left.')
             else:
-                print(f"ANSWER: The {wtype} is '{word}'\n")
+                print(f'      ANSWER: The word is "{word}"\n')
 
 
 class Game:
@@ -214,10 +213,10 @@ def main():
     while True:
         game.initialise()
         game.play_puzzle()
-        answer = input("Do you want to play another game (y/n)? ").upper()
+        answer = input(" > Do you want to play another puzzle (y/n)? ").upper()
         print()
         if answer == "N":
-            print("Thank you for playing!\n")
+            print(" > Thank you for playing!\n")
             break
 
 
