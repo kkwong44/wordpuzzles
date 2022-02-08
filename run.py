@@ -179,6 +179,20 @@ class Game:
         self.grid = None
         self.import_list = ImportSheet("words")
         self.word_dict = self.import_list.all_into_dict()
+        print("  =================================================== ")
+        print(" !                                                   !")
+        print(" ! WordPuzzle is a word search puzzel.               !")
+        print(" !                                                   !")
+        print(" ! There is word hidden in the table.                !")
+        print(" ! Type of word and length will be given in each     !")
+        print(" ! puzzle and it can be read horizonally, vertically !")
+        print(" ! and can spelled backward.                         !")
+        print(" !                                                   !")
+        print(" ! You have 3 attemps to solve each puzzle.          !")
+        print(" ! Can you find it?                                  !")
+        print("  =================================================== ")
+        print()
+        print("      Below is a puzzel with a hidden word.\n")
 
     def initialise(self):
         """
