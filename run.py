@@ -234,7 +234,8 @@ def main():
         while True:
             game.initialise()
             game.play_puzzle()
-            answer = input("> Do you want to play another puzzle (y/n)?\n").upper()
+            answer = input("> Do you want to play another puzzle (y/n)?\n")
+            answer = answer.upper()
             print()
             if answer == "N":
                 print("> Thank you for playing!\n")
