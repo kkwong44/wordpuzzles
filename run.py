@@ -138,32 +138,32 @@ class ModifyGrid:
         wsize = len(word)
         for attempt in range(3):
             if attempt == 0:
-                str1 = f' > Can you find "{wtype}" with ({wsize}) '
+                str1 = f'> Can you find "{wtype}" with ({wsize}) '
                 str2 = "letter in the table?"
                 print(str1 + str2)
             # Get answer from player
-            answer = input(" > Enter your answer here: ").upper()
+            answer = input("> Enter your answer here:\n").upper()
             if answer == word:
-                print(f'\n > Well Done! You have found the word "{word}".\n')
+                print(f'\n> Well Done! You have found the word "{word}".\n')
                 break
             # Use appropriate message for incorect answer
             if wsize > len(answer) and attempt < 2:
-                print(f'\n > Your answer "{answer}" is too short.\n')
+                print(f'\n> Your answer "{answer}" is too short.\n')
                 # print(f' "{wtype}" with ({wsize}) letters.\n')
             elif wsize < len(answer):
-                print(f'\n > Your answer "{answer}" is too long.\n')
+                print(f'\n> Your answer "{answer}" is too long.\n')
                 # print(f' "{wtype}" with ({wsize}) letters.\n')
             else:
-                print(f'\n > Wrong Answer: "{answer}" is not the word. \n')
+                print(f'\n> Wrong Answer: "{answer}" is not the word. \n')
             # Message to indicate number of attemps left in the game
             if attempt == 0:
                 print(f'      "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f' > You have {2-attempt} attempts left.')
+                print(f'> You have {2-attempt} attempts left.')
             elif attempt == 1:
                 print(f'      "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f' > You have {2-attempt} attempt left.')
+                print(f'> You have {2-attempt} attempt left.')
             else:
                 print(f'      ANSWER: The word is "{word}"\n')
 
@@ -181,18 +181,20 @@ class Game:
         self.word_dict = self.import_list.all_into_dict()
         print("  =================================================== ")
         print(" !                                                   !")
-        print(" ! WordPuzzle is a word search puzzel.               !")
+        print(" ! WordPuzzles is a word search puzzle.              !")
         print(" !                                                   !")
-        print(" ! There is word hidden in the table.                !")
+        print(" ! The game is to find the hidden word in the table. !")
+        print(" !                                                   !")
         print(" ! Type of word and length will be given in each     !")
         print(" ! puzzle and it can be read horizonally, vertically !")
         print(" ! and can spelled backward.                         !")
         print(" !                                                   !")
-        print(" ! You have 3 attemps to solve each puzzle.          !")
-        print(" ! Can you find it?                                  !")
+        print(" ! You have 3 attempts to solve each puzzle.         !")
+        print(" !                                                   !")
+        print(" ! Enter your answer when you found the word.        !")
+        print(" !                                                   !")
         print("  =================================================== ")
         print()
-        print("      Below is a puzzel with a hidden word.\n")
 
     def initialise(self):
         """
@@ -224,14 +226,21 @@ def main():
     Main section to run program
     """
     game = Game(6)
-    while True:
-        game.initialise()
-        game.play_puzzle()
-        answer = input(" > Do you want to play another puzzle (y/n)? ").upper()
-        print()
-        if answer == "N":
-            print(" > Thank you for playing!\n")
-            break
+    answer = input("> Are you ready to play (y/n)?\n").upper()
+    if answer == "Y":
+        print("      Below is a puzzle with a hidden word.")
+        print("      You have 3 attemps to solve the puzzle.")
+        print("      Can you find it?\n")
+        while True:
+            game.initialise()
+            game.play_puzzle()
+            answer = input("> Do you want to play another puzzle (y/n)?\n").upper()
+            print()
+            if answer == "N":
+                print("> Thank you for playing!\n")
+                break
+    else:
+        print("> You have exited the game.")
 
 
 main()
