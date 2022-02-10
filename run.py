@@ -136,6 +136,7 @@ class ModifyGrid:
         word = self.add_word.get("name")
         wtype = self.add_word.get("type")
         wsize = len(word)
+        score = 0
         for attempt in range(3):
             if attempt == 0:
                 str1 = f'> Can you find "{wtype}" with ({wsize}) '
@@ -145,7 +146,8 @@ class ModifyGrid:
             answer = input("> Enter your answer here:\n").upper()
             if answer == word:
                 print(f'\n> Well Done! You have found the word "{word}".\n')
-                break
+                score = 1
+                return score
             # Use appropriate message for incorect answer
             if wsize > len(answer) and attempt < 2:
                 print(f'\n> Your answer "{answer}" is too short.\n')
@@ -166,6 +168,7 @@ class ModifyGrid:
                 print(f'> You have {2-attempt} attempt left.')
             else:
                 print(f'      ANSWER: The word is "{word}"\n')
+        return score
 
 
 class Game:
@@ -210,6 +213,7 @@ class Game:
         """
         Create puzzel game for player to play
         """
+        score = 0
         row_id = random.randint(1, len(self.word_dict)-1)
         word_prop = self.word_dict[row_id]
         # Insert word to grid
@@ -217,8 +221,9 @@ class Game:
         new_grids.insert_word()
         self.grid.display(self.puzzle_grid)
         # Ask and check answer
-        new_grids.get_answer(self.grid)
+        score = new_grids.get_answer(self.grid)
         self.grid.display(self.answer_grid)
+        return score
 
 
 def main():
@@ -231,13 +236,18 @@ def main():
         print("      Below is a puzzle with a hidden word.")
         print("      You have 3 attemps to solve the puzzle.")
         print("      Can you find it?\n")
+        total_score = 0
+        puzzles = 0
         while True:
             game.initialise()
-            game.play_puzzle()
+            score = game.play_puzzle()
+            total_score += score
+            puzzles += 1
             answer = input("> Do you want to play another puzzle (y/n)?\n")
             answer = answer.upper()
             print()
             if answer == "N":
+                print(f"> You scored {total_score} out of {puzzles}\n")
                 print("> Thank you for playing!\n")
                 break
     else:
