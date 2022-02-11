@@ -195,6 +195,7 @@ class Game:
         self.grid = None
         self.import_list = ImportSheet("words")
         self.word_dict = self.import_list.all_into_dict()
+        self.import_scores = ImportSheet("leaderboard")
         print("  =================================================== ")
         print(" !                                                   !")
         print(" ! WordPuzzles is a word search puzzle.              !")
@@ -222,6 +223,13 @@ class Game:
         self.grid.filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         self.puzzle_grid = self.grid.create_grid()
 
+    def display_leaderboard(self):
+        """
+        Display Leaderboard
+        """
+        scores_dict = self.import_scores.all_into_dict()
+        self.import_scores.display_dict(scores_dict)
+
     def play_puzzle(self):
         """
         Create puzzel game for player to play
@@ -244,6 +252,7 @@ def main():
     Main section to run program
     """
     game = Game(6)
+    game.display_leaderboard()
     answer = input("> Are you ready to play (y/n)?\n").upper()
     if answer == "Y":
         print("      Below is a puzzle with a hidden word.")
