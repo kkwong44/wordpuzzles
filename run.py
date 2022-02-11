@@ -51,6 +51,19 @@ class ImportSheet():
 
         return words_in_dict
 
+    def display_dict(self, dicts):
+        """
+        Display dictionary on terminal
+        """
+        print("   " + self.sheet.capitalize())
+        print()
+        for dictionary in dicts:
+            line = ""
+            for key, value in dictionary.items():
+                line += "   " + str(key) + ": " + str(value)
+            print(line)
+        print()
+
 
 class Grid:
     """
