@@ -299,13 +299,36 @@ class Game:
             self.import_scores.update_sheet(scores_dict)
 
 
+class Question:
+    """
+    Validate user answer from input question
+    """
+    def __init__(self, question):
+        self.question = question
+
+    def answer(self):
+        """
+        Ask question and return answer
+        """
+        answer = ""
+        while answer not in ("Y", "N"):
+            if answer == "":
+                # qust = self.msg
+                answer = input(self.question).upper()
+            if answer not in ("Y", "N"):
+                print("> Invalid Entery!")
+                answer = input("> Please enter (y/n).\n").upper()
+        return answer
+
+
 def main():
     """
     Main section to run program
     """
     game = Game(6)
     game.display_leaderboard()
-    answer = input("> Are you ready to play (y/n)?\n").upper()
+    question = Question("> Are you ready to play (y/n)?\n")
+    answer = question.answer()
     if answer == "Y":
         print("      Below is a puzzle with a hidden word.")
         print("      You have 3 attemps to solve the puzzle.")
@@ -319,8 +342,8 @@ def main():
             puzzles += 1
             rate = round((total_score / puzzles) / 10, 4)
             final_score = total_score + rate
-            answer = input("> Do you want to play another puzzle (y/n)?\n")
-            answer = answer.upper()
+            question = Question("> Want to play another puzzle (y/n)?\n")
+            answer = question.answer().upper()
             print()
             if answer == "N":
                 print(f"> You scored {total_score} out of {puzzles}\n")
