@@ -219,6 +219,7 @@ class Game:
         self.import_list = ImportSheet("words")
         self.word_dict = self.import_list.all_into_dict()
         self.import_scores = ImportSheet("leaderboard")
+        print(Fore.YELLOW, Style.BRIGHT)
         print("  =================================================== ")
         print(" !                                                   !")
         print(" ! WordPuzzles is a word search puzzle.              !")
@@ -234,7 +235,7 @@ class Game:
         print(" ! Enter your answer when you found the word.        !")
         print(" !                                                   !")
         print("  =================================================== ")
-        print()
+        print(Style.RESET_ALL)
 
     def initialise(self):
         """
