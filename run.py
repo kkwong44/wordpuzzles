@@ -68,6 +68,22 @@ class ImportSheet():
             print(line)
         print()
 
+    def update_sheet(self, leaderboard):
+        """
+        Update values in leaderboard worksheet
+        """
+        sheet = SHEET.worksheet(self.sheet)
+        if self.sheet.upper() == "LEADERBOARD":
+            newlist = []
+            for i in range(5):
+                vaules = []
+                scores = leaderboard[i]
+                vaules.append(scores.get("score"))
+                vaules.append(scores.get("success_rate"))
+                newlist.append(vaules)
+            array = np.array(newlist)
+            sheet.update('B2', array.tolist())
+
 
 class Grid:
     """
@@ -253,6 +269,7 @@ class Game:
     def check_leaderboard(self, score):
         """
         Check score against leaderboard. Start with rank 5 to rank 1.
+        Update worksheet when score is rank top 5
         """
         ranking = 0
         scores_dict = self.import_scores.all_into_dict()
@@ -276,8 +293,8 @@ class Game:
                     ranking = i + 1
                     last_rank["score"] = int(score)
                     last_rank["success_rate"] = round(score - int(score), 2)
-        print(scores_dict)
-        return ranking
+        if ranking > 0:
+            self.import_scores.update_sheet(scores_dict)
 
 
 def main():
