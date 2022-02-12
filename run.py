@@ -58,7 +58,7 @@ class ImportSheet():
         """
         Display dictionary on terminal
         """
-        print("   " + self.sheet.capitalize())
+        print(Fore.MAGENTA, Style.BRIGHT + "  " + self.sheet.capitalize())
         print()
         for dictionary in dicts:
             line = ""
@@ -69,7 +69,7 @@ class ImportSheet():
                 else:
                     line += "   " + str(key) + ": " + str(value)
             print(line)
-        print()
+        print(Style.RESET_ALL)
 
     def update_sheet(self, leaderboard):
         """
