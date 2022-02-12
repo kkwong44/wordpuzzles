@@ -250,6 +250,35 @@ class Game:
         self.grid.display(self.answer_grid)
         return score
 
+    def check_leaderboard(self, score):
+        """
+        Check score against leaderboard. Start with rank 5 to rank 1.
+        """
+        ranking = 0
+        scores_dict = self.import_scores.all_into_dict()
+        for i in range(4, -1, -1):
+            last_rank = scores_dict[i]
+            next_rank = scores_dict[i-1]
+            last_score = last_rank.get("score") + last_rank.get("success_rate")
+            if i == 0:
+                next_score = 99999
+            else:
+                next_score = next_rank.get("score") + \
+                    next_rank.get("success_rate")
+            if score == last_score:
+                ranking = i + 1
+            elif score > last_score:
+                if score > next_score:
+                    ranking = i + 1
+                    last_rank["score"] = next_rank.get("score")
+                    last_rank["success_rate"] = next_rank.get("success_rate")
+                else:
+                    ranking = i + 1
+                    last_rank["score"] = int(score)
+                    last_rank["success_rate"] = round(score - int(score), 2)
+        print(scores_dict)
+        return ranking
+
 
 def main():
     """
@@ -257,6 +286,7 @@ def main():
     """
     game = Game(6)
     game.display_leaderboard()
+    game.check_leaderboard(3.6)
     answer = input("> Are you ready to play (y/n)?\n").upper()
     if answer == "Y":
         print("      Below is a puzzle with a hidden word.")
