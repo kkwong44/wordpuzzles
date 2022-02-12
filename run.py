@@ -7,6 +7,9 @@ import random
 import gspread
 from google.oauth2.service_account import Credentials
 import numpy as np
+from colorama import init
+from colorama import Fore, Back, Style
+init()
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
