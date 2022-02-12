@@ -266,7 +266,7 @@ class Game:
         self.grid.display(self.answer_grid)
         return score
 
-    def check_leaderboard(self, score):
+    def check_leaderboard(self, score, solved, puzzles):
         """
         Check score against leaderboard. Start with rank 5 to rank 1.
         Update worksheet when score is rank top 5
@@ -295,8 +295,11 @@ class Game:
                     last_rank["score"] = int(score)
                     rate = round(score - int(score), 4) * 10
                     last_rank["success_rate"] = rate
+        print(f"> You scored {solved} out of {puzzles}\n")
         if ranking > 0:
+            print(f"   Congratulations! Your score is rank top {ranking}.\n")
             self.import_scores.update_sheet(scores_dict)
+        return ranking
 
 
 class Question:
@@ -332,21 +335,22 @@ def main():
         print("      Below is a puzzle with a hidden word.")
         print("      You have 3 attemps to solve the puzzle.")
         print("      Can you find it?\n")
-        total_score = 0
+        solved = 0
         puzzles = 0
         while True:
             game.initialise()
             score = game.play_puzzle()
-            total_score += score
+            solved += score
             puzzles += 1
-            rate = round((total_score / puzzles) / 10, 4)
-            final_score = total_score + rate
+            rate = round((solved / puzzles) / 10, 4)
+            final_score = solved + rate
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
             print()
             if answer == "N":
-                print(f"> You scored {total_score} out of {puzzles}\n")
-                game.check_leaderboard(final_score)
+                rank = game.check_leaderboard(final_score, solved, puzzles)
+                if rank > 0:
+                    game.display_leaderboard()
                 print("> Thank you for playing!\n")
                 break
     else:
