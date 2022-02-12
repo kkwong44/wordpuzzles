@@ -357,4 +357,7 @@ def main():
         print("> You have exited the game.")
 
 
-main()
+# Python program to execute function main()
+# directly or execute when imported
+if __name__ == "__main__":
+    main()
