@@ -313,7 +313,6 @@ class Question:
         answer = ""
         while answer not in ("Y", "N"):
             if answer == "":
-                # qust = self.msg
                 answer = input(self.question).upper()
             if answer not in ("Y", "N"):
                 print("> Invalid Entery!")
