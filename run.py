@@ -60,7 +60,11 @@ class ImportSheet():
         for dictionary in dicts:
             line = ""
             for key, value in dictionary.items():
-                line += "   " + str(key) + ": " + str(value)
+                if key == "success_rate":
+                    rate = "{:.1%}"
+                    line += "   " + str(key) + ": " + str(rate.format(value))
+                else:
+                    line += "   " + str(key) + ": " + str(value)
             print(line)
         print()
 
@@ -196,7 +200,6 @@ class Game:
         self.import_list = ImportSheet("words")
         self.word_dict = self.import_list.all_into_dict()
         self.import_scores = ImportSheet("leaderboard")
-        self.scores_dict = self.import_scores.all_into_dict()
         print("  =================================================== ")
         print(" !                                                   !")
         print(" ! WordPuzzles is a word search puzzle.              !")
@@ -228,7 +231,8 @@ class Game:
         """
         Display Leaderboard
         """
-        self.import_scores.display_dict(self.scores_dict)
+        scores_dict = self.import_scores.all_into_dict()
+        self.import_scores.display_dict(scores_dict)
 
     def play_puzzle(self):
         """
