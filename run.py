@@ -117,11 +117,11 @@ class Grid:
         """
         self.any_grid = input_grid
         for x_cord in range(self.length):
-            row = "      "
+            row = "          "
             for y_cord in range(self.length):
                 row += self.any_grid[x_cord, y_cord] + " "
-            print(row)
-        print()
+            print(Fore.WHITE + Style.BRIGHT + row)
+        print(Fore.GREEN + Style.NORMAL)
 
 
 class ModifyGrid:
@@ -175,35 +175,39 @@ class ModifyGrid:
         score = 0
         for attempt in range(3):
             if attempt == 0:
-                str1 = f'> Can you find "{wtype}" with ({wsize}) '
-                str2 = "letter in the table?"
-                print(str1 + str2)
+                str1 = f'   Can you find "{wtype}" with ({wsize}) '
+                str2 = "letter in the table?\n"
+                print(Fore.GREEN + Style.NORMAL + str1 + str2)
             # Get answer from player
-            answer = input("> Enter your answer here:\n").upper()
+            answer = input(Fore.WHITE + "> Enter your answer here:\n").upper()
             if answer == word:
-                print(f'\n> Well Done! You have found the word "{word}".\n')
+                print(Fore.GREEN)
+                print(f'    Well Done! You have found the word "{word}".\n')
                 score = 1
                 return score
             # Use appropriate message for incorect answer
             if wsize > len(answer) and attempt < 2:
-                print(f'\n> Your answer "{answer}" is too short.\n')
+                print(Fore.WHITE)
+                print(f'> Your answer "{answer}" is too short.\n')
                 # print(f' "{wtype}" with ({wsize}) letters.\n')
             elif wsize < len(answer):
-                print(f'\n> Your answer "{answer}" is too long.\n')
+                print(Fore.WHITE)
+                print(f'> Your answer "{answer}" is too long.\n')
                 # print(f' "{wtype}" with ({wsize}) letters.\n')
             else:
-                print(f'\n> Wrong Answer: "{answer}" is not the word. \n')
+                print(Fore.WHITE)
+                print(f'> Wrong Answer: "{answer}" is not the word. \n')
             # Message to indicate number of attemps left in the game
             if attempt == 0:
-                print(f'      "{wtype}" with ({wsize}) letter.\n')
+                print(Fore.GREEN + f'    "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f'> You have {2-attempt} attempts left.')
+                print(Fore.WHITE + f'> You have {2-attempt} attempts left.')
             elif attempt == 1:
-                print(f'      "{wtype}" with ({wsize}) letter.\n')
+                print(Fore.GREEN + f'    "{wtype}" with ({wsize}) letter.\n')
                 grid.display(self.puzzle_grid)
-                print(f'> You have {2-attempt} attempt left.')
+                print(Fore.WHITE + f'> You have {2-attempt} attempt left.')
             else:
-                print(f'      ANSWER: The word is "{word}"\n')
+                print(Fore.GREEN + f'    ANSWER: The word is "{word}"\n')
         return score
 
 
@@ -333,12 +337,13 @@ def main():
     """
     game = Game(6)
     game.display_leaderboard()
+    print(Fore.WHITE)
     question = Question("> Are you ready to play (y/n)?\n")
     answer = question.answer()
     if answer == "Y":
-        print("      Below is a puzzle with a hidden word.")
-        print("      You have 3 attemps to solve the puzzle.")
-        print("      Can you find it?\n")
+        print(Fore.GREEN + "   Below is a puzzle with a hidden word.")
+        print("   You have 3 attemps to solve the puzzle.")
+        print("   Can you find it?\n")
         solved = 0
         puzzles = 0
         while True:
@@ -348,6 +353,7 @@ def main():
             puzzles += 1
             rate = round((solved / puzzles) / 10, 4)
             final_score = solved + rate
+            print(Fore.WHITE, Style.NORMAL)
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
             print()
