@@ -172,6 +172,14 @@ class ModifyGrid:
                 y_cord += 1
             return self.puzzle_grid, self.answer_grid
 
+    def hints(self, attempt):
+        """
+        Provide hints to the answer
+        """
+        word = self.add_word.get("name")
+        hint = word[:attempt + 1]
+        print('    Hint: The word begins with "' + hint + '"\n')
+
     def get_answer(self, grid):
         """
         Ask and check player's answer. Three attempts are allow for each game.
@@ -207,10 +215,12 @@ class ModifyGrid:
             # Message to indicate number of attemps left in the game
             if attempt == 0:
                 print(Fore.GREEN + f'    "{wtype}" with ({wsize}) letter.\n')
+                self.hints(attempt)
                 grid.display(self.puzzle_grid)
                 print(Fore.WHITE + f'> You have {2-attempt} attempts left.')
             elif attempt == 1:
                 print(Fore.GREEN + f'    "{wtype}" with ({wsize}) letter.\n')
+                self.hints(attempt)
                 grid.display(self.puzzle_grid)
                 print(Fore.WHITE + f'> You have {2-attempt} attempt left.')
             else:
