@@ -189,10 +189,6 @@ class ModifyGrid:
         wsize = len(word)
         score = 0
         for attempt in range(3):
-            if attempt == 0:
-                str1 = f'   Can you find "{wtype}" with ({wsize}) '
-                str2 = "letter in the table?\n"
-                print(Fore.GREEN + str1 + str2)
             # Get answer from player
             answer = input(Fore.WHITE + "> Enter your answer here:\n").upper()
             if answer == word:
@@ -282,9 +278,15 @@ class Game:
         score = 0
         row_id = random.randint(1, len(self.word_dict)-1)
         word_prop = self.word_dict[row_id]
+        word = word_prop.get("name")
+        wtype = word_prop.get("type")
+        wsize = len(word)
         # Insert word to grid
         new_grids = ModifyGrid(self.puzzle_grid, self.answer_grid, word_prop)
         new_grids.insert_word()
+        str1 = f'\n   Can you find "{wtype}" with ({wsize}) '
+        str2 = "letter in the table?\n"
+        print(Fore.GREEN + str1 + str2)
         self.grid.display(self.puzzle_grid)
         # Ask and check answer
         score = new_grids.get_answer(self.grid)
@@ -359,9 +361,8 @@ def main():
     question = Question("> Are you ready to play (y/n)?\n")
     answer = question.answer()
     if answer == "Y":
-        print(Fore.GREEN + "   Below is a puzzle with a hidden word.")
+        print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
         print("   You have 3 attemps to solve the puzzle.")
-        print("   Can you find it?\n")
         solved = 0
         puzzles = 0
         while True:
