@@ -372,6 +372,8 @@ def main():
             puzzles += 1
             rate = round((solved / puzzles) / 10, 4)
             final_score = solved + rate
+            msg = f"    You have solved {solved} out of {puzzles}"
+            print(Fore.GREEN + msg)
             print(Fore.WHITE)
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
