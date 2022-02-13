@@ -303,7 +303,8 @@ class Game:
                     last_rank["score"] = int(score)
                     rate = round(score - int(score), 4) * 10
                     last_rank["success_rate"] = rate
-        print(f"> You scored {solved} out of {puzzles}\n")
+        print(Fore.YELLOW + Style.BRIGHT)
+        print(f"   You scored {solved} out of {puzzles}\n")
         if ranking > 0:
             print(f"   Congratulations! Your score is rank top {ranking}.\n")
             self.import_scores.update_sheet(scores_dict)
@@ -356,15 +357,17 @@ def main():
             print(Fore.WHITE, Style.NORMAL)
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
-            print()
+            # print()
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
                     game.display_leaderboard()
-                print("> Thank you for playing!\n")
+                print(Fore.WHITE + "> Thank you for playing!")
+                print(Style.RESET_ALL)
                 break
     else:
         print("> You have exited the game.")
+        print(Style.RESET_ALL)
 
 
 # Python program to execute function main()
