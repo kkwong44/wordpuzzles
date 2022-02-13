@@ -366,7 +366,7 @@ class Question:
                 answer = input(self.question).upper()
             if answer not in ("Y", "N"):
                 print("> Invalid Entry!")
-                answer = input("> Please enter (y/n).\n").upper()
+                answer = input("> Please enter (y/n):\n").upper()
         return answer
 
 
@@ -396,7 +396,6 @@ def main():
             print(Fore.WHITE)
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
-            # print()
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
