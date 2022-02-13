@@ -73,10 +73,10 @@ class ImportSheet():
                 if key == "rank" and value != ranking:
                     highlight = False
             if highlight is True:
-                print(Fore.CYAN + Style.BRIGHT + line)
+                print(Fore.CYAN + line)
             else:
-                print(Fore.MAGENTA + Style.BRIGHT + line)
-        print(Style.RESET_ALL)
+                print(Fore.MAGENTA + line)
+        print(Fore.WHITE)
 
     def update_sheet(self, leaderboard):
         """
@@ -127,8 +127,8 @@ class Grid:
             row = "          "
             for y_cord in range(self.length):
                 row += self.any_grid[x_cord, y_cord] + " "
-            print(Fore.WHITE + Style.BRIGHT + row)
-        print(Fore.GREEN + Style.NORMAL)
+            print(Fore.WHITE + row)
+        print(Fore.GREEN)
 
 
 class ModifyGrid:
@@ -192,7 +192,7 @@ class ModifyGrid:
             if attempt == 0:
                 str1 = f'   Can you find "{wtype}" with ({wsize}) '
                 str2 = "letter in the table?\n"
-                print(Fore.GREEN + Style.NORMAL + str1 + str2)
+                print(Fore.GREEN + str1 + str2)
             # Get answer from player
             answer = input(Fore.WHITE + "> Enter your answer here:\n").upper()
             if answer == word:
@@ -256,7 +256,7 @@ class Game:
         print(" ! Enter your answer when you found the word.        !")
         print(" !                                                   !")
         print("  =================================================== ")
-        print(Style.RESET_ALL)
+        print()
 
     def initialise(self):
         """
@@ -371,7 +371,7 @@ def main():
             puzzles += 1
             rate = round((solved / puzzles) / 10, 4)
             final_score = solved + rate
-            print(Fore.WHITE, Style.NORMAL)
+            print(Fore.WHITE)
             question = Question("> Want to play another puzzle (y/n)?\n")
             answer = question.answer().upper()
             # print()
