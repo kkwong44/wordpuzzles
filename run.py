@@ -4,6 +4,7 @@ This is a simple game to find a word in a grid among random characters.
 Import google spreadsheet library, Credentials and other libraries
 """
 import random
+import sys
 import gspread
 from google.oauth2.service_account import Credentials
 import numpy as np
@@ -283,7 +284,16 @@ class Game:
         wsize = len(word)
         # Insert word to grid
         new_grids = ModifyGrid(self.puzzle_grid, self.answer_grid, word_prop)
-        new_grids.insert_word()
+        valid_len = True
+        try_next = 0
+        # Try another word when failed the length test
+        # and exit program after 100 attempts
+        while valid_len is True:
+            valid_len = new_grids.insert_word()
+            try_next += 1
+            if try_next == 100:
+                print(Fore.RED + "> Program Error - Invalid Word Length.")
+                sys.exit()
         str1 = f'\n   Can you find "{wtype}" with ({wsize}) '
         str2 = "letter in the table?\n"
         print(Fore.GREEN + str1 + str2)
