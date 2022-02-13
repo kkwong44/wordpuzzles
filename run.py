@@ -21,7 +21,11 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('words')
+try:
+    SHEET = GSPREAD_CLIENT.open('words')
+except gspread.exceptions.SpreadsheetNotFound:
+    print(Fore.RED + '> Program Error - Spreadsheet "words" not found.')
+    sys.exit()
 
 
 class ImportSheet():
@@ -50,7 +54,16 @@ class ImportSheet():
         """
         Import all values from worksheet into dictionary
         """
-        sheet = SHEET.worksheet(self.sheet)
+        try:
+            sheet = SHEET.worksheet(self.sheet)
+        except gspread.exceptions.WorksheetNotFound:
+            msg = f'> Program Error - Worksheet "{self.sheet}" not found.'
+            print(Fore.RED + msg)
+            sys.exit()
+        # except gspread.exceptions.SpreadsheetNotFound:
+        #     print("JJJJJJJJJJJJJJJJJ")
+        # except gspread.exceptions.APIError:
+        #     print("MMMMMMM")
         words_in_dict = sheet.get_all_records()
 
         return words_in_dict
