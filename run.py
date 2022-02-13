@@ -60,10 +60,6 @@ class ImportSheet():
             msg = f'> Program Error - Worksheet "{self.sheet}" not found.'
             print(Fore.RED + msg)
             sys.exit()
-        # except gspread.exceptions.SpreadsheetNotFound:
-        #     print("JJJJJJJJJJJJJJJJJ")
-        # except gspread.exceptions.APIError:
-        #     print("MMMMMMM")
         words_in_dict = sheet.get_all_records()
 
         return words_in_dict
@@ -148,7 +144,7 @@ class Grid:
 class ModifyGrid:
     """
     Randomly decide the direction to insert the word.
-    It can be Left-right, Right-Left, Up-Down or Down_Up
+    It can be Left-right, Right-Left, Up-Down or Down-Up
     """
     def __init__(self, puzzle_grid, answer_grid, add_word):
         self.puzzle_grid = puzzle_grid
@@ -196,7 +192,7 @@ class ModifyGrid:
 
     def get_answer(self, grid):
         """
-        Ask and check player's answer. Three attempts are allow for each game.
+        Ask and check player's answer. Three attempts allow for each game.
         """
         word = self.add_word.get("name")
         wtype = self.add_word.get("type")
@@ -210,7 +206,7 @@ class ModifyGrid:
                 print(f'    Well Done! You have found the word "{word}".\n')
                 score = 1
                 return score
-            # Use appropriate message for incorect answer
+            # Use appropriate message for incorrect answer
             if wsize > len(answer) and attempt < 2:
                 print(Fore.WHITE)
                 print(f'> Your answer "{answer}" is too short.\n')
@@ -258,8 +254,8 @@ class Game:
         print(" ! The game is to find the hidden word in the table. !")
         print(" !                                                   !")
         print(" ! Type of word and length will be given in each     !")
-        print(" ! puzzle and it can be read horizonally, vertically !")
-        print(" ! and can spelled backward.                         !")
+        print(" ! puzzle and it can be read horizontally,           !")
+        print(" ! vertically and can spelled backward.              !")
         print(" !                                                   !")
         print(" ! You have 3 attempts to solve each puzzle.         !")
         print(" !                                                   !")
@@ -287,7 +283,7 @@ class Game:
 
     def play_puzzle(self):
         """
-        Create puzzel game for player to play
+        Create puzzle game for player to play
         """
         score = 0
         row_id = random.randint(1, len(self.word_dict)-1)
@@ -369,7 +365,7 @@ class Question:
             if answer == "":
                 answer = input(self.question).upper()
             if answer not in ("Y", "N"):
-                print("> Invalid Entery!")
+                print("> Invalid Entry!")
                 answer = input("> Please enter (y/n).\n").upper()
         return answer
 
@@ -385,7 +381,7 @@ def main():
     answer = question.answer()
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
-        print("   You have 3 attemps to solve the puzzle.")
+        print("   You have 3 attempts to solve the puzzle.")
         solved = 0
         puzzles = 0
         while True:
