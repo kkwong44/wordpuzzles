@@ -54,7 +54,7 @@ class ImportSheet():
 
         return words_in_dict
 
-    def display_dict(self, dicts):
+    def display_dict(self, dicts, ranking):
         """
         Display dictionary on terminal
         """
@@ -68,7 +68,14 @@ class ImportSheet():
                     line += "   " + str(key) + ": " + str(rate.format(value))
                 else:
                     line += "   " + str(key) + ": " + str(value)
-            print(line)
+                if key == "rank" and value == ranking:
+                    highlight = True
+                if key == "rank" and value != ranking:
+                    highlight = False
+            if highlight is True:
+                print(Fore.CYAN + Style.BRIGHT + line)
+            else:
+                print(Fore.MAGENTA + Style.BRIGHT + line)
         print(Style.RESET_ALL)
 
     def update_sheet(self, leaderboard):
@@ -251,12 +258,12 @@ class Game:
         self.grid.filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         self.puzzle_grid = self.grid.create_grid()
 
-    def display_leaderboard(self):
+    def display_leaderboard(self, ranking):
         """
         Display Leaderboard
         """
         scores_dict = self.import_scores.all_into_dict()
-        self.import_scores.display_dict(scores_dict)
+        self.import_scores.display_dict(scores_dict, ranking)
 
     def play_puzzle(self):
         """
@@ -337,7 +344,7 @@ def main():
     Main section to run program
     """
     game = Game(6)
-    game.display_leaderboard()
+    game.display_leaderboard(None)
     print(Fore.WHITE)
     question = Question("> Are you ready to play (y/n)?\n")
     answer = question.answer()
@@ -361,7 +368,7 @@ def main():
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
-                    game.display_leaderboard()
+                    game.display_leaderboard(rank)
                 print(Fore.WHITE + "> Thank you for playing!")
                 print(Style.RESET_ALL)
                 break
