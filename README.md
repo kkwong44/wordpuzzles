@@ -36,14 +36,33 @@ A process flow chart was created to show the basic processes and logics of the g
 
 ![Process Flow Chart](readme/images/process-flow-chart.png)
 
-### *Processes*
+### *How to Play Processes*
 The following are the main processes to run the game.
+* Display description and game instruction
+* Display leader board for top 5 ranking
+* Ask player to play game
 * Select a random word for each puzzle
 * Create puzzle grid and answer grid with random base values
 * The selected word need to be inserted randomly for each puzzle
-* The puzzle grid need to be presented to the player with clues about the word
-* Allow 3 attempts to solve each puzzle
+* Display puzzle grid with clues about the word
+* Ask player to enter answer
 * Validation on each answer and return result to player
-* Option to play another puzzle at the end of cureent puzzle.
+* Allow 3 attempts to solve each puzzle
+* Give further clue for each attempt
+* Option to play another puzzle at the end of cureent puzzle
+* Display final score
+* Display and update leader board if score is within top 5
+___
+## How to Play
+* Instruction is given to the player at the begining of the game.
+* For each puzzle, a clue about the hidden word is display on the screen.
+* Base on the clue, player need to find the word in the puzzle grid.
+* Solve the puzzle and enter the answer.
+* If the answer is correct then option is given to solve another puzzle.
+* If answer incorrect then player can try again with another answer.
+* Only 3 attempts allow for each puzzle. Extra clue will be given to each attempt..
+* The answer always show at the end of the puzzle where the hidden word is on the grid.
+* At the end of each puzzle, score will be displayed with option to play another puzzle 
+
 ___
 ## Features
