@@ -25,6 +25,17 @@ The target audients will be players that wish to test their skills to find the h
 * Use to develop problem solving skills
 * Learning new words
 ___
+## How to Play
+* Instruction will be given to the player at the begining of the game.
+* For each puzzle, a clue about the hidden word is display on the screen.
+* Base on the clue, player need to find the word in the puzzle grid.
+* Solve the puzzle by entering the answer.
+* If the answer is correct then option is given to solve another puzzle.
+* If answer incorrect then player can try again with another answer.
+* Only 3 attempts allow for each puzzle. Extra clue will be given to each attempt.
+* The answer always show at the end of each puzzle and display where the hidden word is on the grid.
+Also, at the end of each puzzle, score will be displayed with option to play another puzzle.
+___
 ## Game Design
 
 ### Initial Design
@@ -53,23 +64,65 @@ The following are the main processes to run the game.
 * Display final score
 * Display and update leader board if score is within top 5
 ___
-## How to Play
-* Instruction is given to the player at the begining of the game.
-* For each puzzle, a clue about the hidden word is display on the screen.
-* Base on the clue, player need to find the word in the puzzle grid.
-* Solve the puzzle and enter the answer.
-* If the answer is correct then option is given to solve another puzzle.
-* If answer incorrect then player can try again with another answer.
-* Only 3 attempts allow for each puzzle. Extra clue will be given to each attempt..
-* The answer always show at the end of each puzzle and where the hidden word is on the grid.
-* At the end of each puzzle, score will be displayed with option to play another puzzle.
+
+## Program Requirements
+
+This project will be developed from a template created by Code Institute which allows python programs to run in a mock terminal.
+
+From the design, this project is going to use a google drive and google sheet name “words” to store data for the game.
+* A worksheet name “words” is used to store a list of words with its attributes. The process to populate this sheet is done by either manually type it in or copy and paste from external sources. This program only requires read access to this worksheet.
+* A worksheet name “leaderboard” is used to store the top 5 ranking scores. Initially, all scores are set to zero and it will be updated by the game. So the program requires both read and write access to this wordsheet.
+
+In order to use google drive and google sheets, authentication and credentials set up are needed before it can be accessed by the program. The following is a brief summary to activate the APIs:
+* Go to the Google Cloud Platform webpage and login to an account
+* Create a new project
+* Select library under APIs and services
+* Select and enable Google Drive API
+* Create credentials and download credential json file to be used in the project
+* Go back to the library, select and enable Google Sheet API
+* Upload the credential jason file into the project repository and ensure the file is not share publicly
+* Use the client email from the credential jason file to share the google sheet
+
+To use Google Sheet API, 2 dependencies are needed to install into the project.
+* Authentication to access the Google Cloud Project
+* gspread library to access the spreadsheet
+The command to install these packages is "pip3 install gspread google-auth"
+
+After the packages have been installed then it need to be imported into the python program file with an IAM configuration. The following is the section of the code required to access the spreadsheet.
+
+>import gspread
+>
+>from google.oauth2.service_account import Credentials
+>
+>SCOPE = [
+>    "https://www.googleapis.com/auth/spreadsheets",
+>    "https://www.googleapis.com/auth/drive.file",
+>    "https://www.googleapis.com/auth/drive"
+>   ]
+>
+>CREDS = Credentials.from_service_account_file('creds.json')
+>
+>SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+>
+>GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+
+The following libraries or modules are also needed to run the program.
+* random (number generator module)
+* sys (module for System-specific parameters and function)
+* numpy (library for scientific computing with Python)
+* colorama (for producing colored terminal text)
 ___
+
 ## Features
 At the beginning of the game, a validation process will be carried out to check the existence of the import spreadsheet. The game will terminate and exit the program with an error message if it can't find the file. When access to the spreadsheet is available then the player will be greeted with a short description and instruction about the game.
 
 ![Screenshot on Description](readme/screenshots/description.png)
 
-Then follow by a leader board with the top 5 ranking.
+Then follow by displaying the leader board with the top 5 ranking.
+
+The information on the leader board is also held in an external worksheet called "leaderboard". This information is imported and load it into a list of dictionaries.
+* Validation will be check against worksheet
+* Exit program with error message when worksheetdoes not exist
 
 The game will pause at this point and wait for the player’s input response to continue or exit the game.
 
@@ -107,10 +160,26 @@ Player can enter anything at this point but a basic validation on length will be
 
 The validation and checking the answer are as follows:
 * A message will display to indicate the answer word is too short when the length is shorter than the puzzle word.
+
+    *Example - First answer was too short*
+
+    ![Screenshot on Answer Too Short](readme/screenshots/answer-short.png)
 * A message will display to indicate the answer word is too long when the length is longer than the puzzle word.
+
+    *Example - Second answer was too long*
+
+    ![Screenshot on Answer Too Long](readme/screenshots/answer-long.png)
 * When the length is matched then the answer word will compare with the puzzle word. The result either correct or incorrect.
+
+    *Example - Final answer was incorrect*
+
+    ![Screenshot on Answer Incorrect](readme/screenshots/answer-incorrect.png)
 * When the answer is matched to the puzzle word then a congratulation message will display. Follow by displaying the answer grid to confirm where the hidden word was.
-* When the answer is incorrect then it will display an incorrect message and perform the following processes:
+
+    *Example - A correct answer*
+
+    ![Screenshot on Answer Correct](readme/screenshots/answer-correct.png)
+* When the answer is incorrect then it will display an incorrect message and perform the following processes *(see previous screenshots)*:
     * Display original clue
     * Display an additional clue with the first letter of the word
     * Display the puzzle grid again
@@ -122,16 +191,36 @@ The validation and checking the answer are as follows:
     * If the answer still incorrect then it will show the answer is wrong and display the puzzle word with the answer grid showing where the word was hidden.
 * A score tally will display at the end of each puzzle
 * Also, an option is available to play another puzzle
+* The processes will repeat and create a new puzzle grid if the player choose to play again. Otherwise the game will end with a message.
 
-The following are examples as described above:
+When the player wishes to end the game, the score in this session will compare the scores in the leader board before displaying a message to thank the player for playing the game.
 
-### *Example - First answer was too short*
-![Screenshot on Answer Too Short](readme/screenshots/answer-short.png)
-### *Example - Second answer was too long*
-![Screenshot on Answer Too Long](readme/screenshots/answer-long.png)
-### *Example - Final answer was incorrect*
-![Screenshot on Answer Incorrect](readme/screenshots/answer-incorrect.png)
-### *Example - A correct answer*
-![Screenshot on Answer Correct](readme/screenshots/answer-correct.png)
+If the score is within top 5 then a congratulation message will be displayed with the leader board and indicate the position you have achieved. This mean the leader board will be adjusted to cater the new entry and remove the lowerest score on the table.
+
+The ranking calculation is based on the following:
+* Total number of solved puzzles and the success rate of the game
+* Success rate is a percentage which calculated by (number of solved puzzle / Total number of puzzles played) * 100
+
+The external worksheet will be updated with the new leader board scores.
 
 
+___
+## Future Features
+
+___
+## Data Model
+
+___
+## Validator Testing
+
+___
+## Testing
+
+___
+## Unfix Bugs
+
+___
+## Deployment
+
+___
+## Credits
