@@ -195,6 +195,10 @@ The validation and checking the answer are as follows:
 
 When the player wishes to end the game, the score in this session will compare the scores in the leader board before displaying a message to thank the player for playing the game.
 
+*Example - Exit Game*
+
+![Screenshot on Exit Game](readme/screenshots/end-game.png)
+
 If the score is within top 5 then a congratulation message will be displayed with the leader board and indicate the position you have achieved. This mean the leader board will be adjusted to cater the new entry and remove the lowerest score on the table.
 
 The ranking calculation is based on the following:
@@ -203,7 +207,9 @@ The ranking calculation is based on the following:
 
 The external worksheet will be updated with the new leader board scores.
 
+*Example - Rank Top 5*
 
+![Screenshot on Rank Top 5](readme/screenshots/top5.png)
 ___
 ## Future Features
 
