@@ -30,14 +30,14 @@ except gspread.exceptions.SpreadsheetNotFound:
 
 class ImportSheet():
     """
-    Access to import list from worksheet words
+    Access worksheet in spreadsheet and import data into a list
     """
     def __init__(self, sheet):
         self.sheet = sheet
 
     def all_into_dict(self):
         """
-        Import all values from worksheet into dictionary
+        Import all values from worksheet into a list of dictionary
         """
         try:
             sheet = SHEET.worksheet(self.sheet)
@@ -51,7 +51,7 @@ class ImportSheet():
 
     def display_dict(self, dicts, ranking):
         """
-        Display dictionary on terminal
+        Display dictionary on terminal as a table
         """
         print(Fore.MAGENTA, Style.BRIGHT + "  " + self.sheet.capitalize())
         print()
@@ -77,15 +77,21 @@ class ImportSheet():
         """
         Update values in leaderboard worksheet
         """
-        sheet = SHEET.worksheet(self.sheet)
+        try:
+            sheet = SHEET.worksheet(self.sheet)
+        except gspread.exceptions.WorksheetNotFound:
+            msg = f'> Program Error - Worksheet "{self.sheet}" not found.'
+            print(Fore.RED + msg)
+            sys.exit()
+        # Create new list before update worksheet
         if self.sheet.upper() == "LEADERBOARD":
             newlist = []
             for i in range(5):
-                vaules = []
+                values = []
                 scores = leaderboard[i]
-                vaules.append(scores.get("score"))
-                vaules.append(scores.get("success_rate"))
-                newlist.append(vaules)
+                values.append(scores.get("score"))
+                values.append(scores.get("success_rate"))
+                newlist.append(values)
             array = np.array(newlist)
             sheet.update('B2', array.tolist())
 
