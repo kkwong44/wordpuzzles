@@ -212,7 +212,12 @@ The external worksheet will be updated with the new leader board scores.
 ![Screenshot on Rank Top 5](readme/screenshots/top5.png)
 ___
 ## Future Features
-
+The following features can be developed in the future to add values to the game and user experiences.
+* Add player login details.
+* Modify leader board to include player’s name
+* Increase grid size and ability to change size based on the word length
+* Build an extensive list of words with length beyond 5 letters
+* Add extra hidden words in puzzel
 ___
 ## Data Model
 
