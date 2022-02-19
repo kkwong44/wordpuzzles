@@ -217,7 +217,7 @@ The following features can be developed in the future to add values to the game 
 * Modify leader board to include player’s name
 * Increase grid size and ability to change size based on the word length
 * Build an extensive list of words with length beyond 5 letters
-* Add extra hidden words in puzzel
+* Add extra hidden words in puzzle
 ___
 ## Data Model
 
@@ -229,7 +229,7 @@ ___
 
 ___
 ## Unfix Bugs
-
+There are no known bugs to be fixed.
 ___
 ## Deployment
 This project will be deployed in Heroku and use a mock terminal to run the program.
@@ -257,5 +257,15 @@ The following are the steps to deploy the project to Heroku.
 10. Click "Open App" at the top when its finished deploy the app. A new tab page will open with your application.
 
 The deployed app can be found [here](https://kk-wordpuzzle.herokuapp.com).
+___
+## Tools
+The tools used to carry out the development and deployment on this project are:
+* Gitpod and Github
+* Google Drive and Google Spreadsheet
+* Python modules and external libraries such as Numpy
+* Chrome Dev Tools
+* PEP8 online checker
+* Webpage Screenshots - Chrome app extension (FireShot)
+* Heroku
 ___
 ## Credits
