@@ -227,6 +227,30 @@ ___
 
 ___
 ## Deployment
+This project will be deployed in Heroku and use a mock terminal to run the program.
 
+In order to run this program, the dependencies on this project also need to be deployed. This is done by submitting the following command to create the requirement.txt file.
+* pip3 freeze > requirements.txt
+
+The requirements.txt will includes dependencies for Google authentication, gspread, numpy, sys, PyPi modules and colorama.
+
+It was noticed that this command did not include the colorama and the following was manually added to the list in the file.
+* colorama==0.4.4
+
+This file needs to be pushed to github before Heroku can use this file to include the dependencies for the program.
+
+The following are the steps to deploy the project to Heroku.
+1. Go to Heroku account and click "Create a new app".
+2. After choosing the app name and setting the region, press "Create app".
+3. Go to "Settings" and navigate to Config Vars.
+4. Add a Config Var with a key word of called CREDS and use the contents from credential json file as the value.
+5. Add another Config Var with a key word of called PORT and a value of 8000.
+6. Navigate to Buildpacks in the Settings and add buildpacks for Python and NodeJS. Must add these buildpacks in this order.
+7. Go to "Deploy" tab section. Scroll down and set Deployment Method to GitHub.
+8. Select the repository to be deployed and connect it to Heroku.
+9. Check "main" is selected for the branch in the deploy section and select "Enable Automatic Deploys".
+10. Click "Open App" at the top when its finished deploy the app. A new tab page will open with your application.
+
+The deployed app can be found [here](https://kk-wordpuzzle.herokuapp.com).
 ___
 ## Credits
