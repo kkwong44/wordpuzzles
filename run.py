@@ -112,7 +112,6 @@ class Grid:
         Fill all items with random characters from input string
         """
         base_grid = np.zeros((self.length, self.length), dtype='U10')
-
         for x_cord in range(self.length):
             for y_cord in range(self.length):
                 base_grid[x_cord, y_cord] = random.choice(self.filler)
@@ -201,11 +200,9 @@ class ModifyGrid:
             if wsize > len(answer) and attempt < 2:
                 print(Fore.WHITE)
                 print(f'> Your answer "{answer}" is too short.\n')
-                # print(f' "{wtype}" with ({wsize}) letters.\n')
             elif wsize < len(answer):
                 print(Fore.WHITE)
                 print(f'> Your answer "{answer}" is too long.\n')
-                # print(f' "{wtype}" with ({wsize}) letters.\n')
             else:
                 print(Fore.WHITE)
                 print(f'> Wrong Answer: "{answer}" is not the word. \n')
@@ -349,7 +346,7 @@ class Question:
 
     def answer(self, question):
         """
-        Ask question and return answer
+        Ask question and return a valid answer
         """
         self.question = question
         answer = ""
