@@ -363,15 +363,18 @@ def main():
     """
     Main section to run program
     """
-    game = Game(6)
+    grid_size = 6
+    game = Game(grid_size)
     game.display_leaderboard(None)
     question = Question()
     answer = question.answer(Fore.WHITE + "> Are you ready to play (y/n)?\n")
+    # Run Puzzle
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
         print("   You have 3 attempts to solve the puzzle.")
         solved = 0
         puzzles = 0
+        # Create new puzzle and tally score till the game end
         while True:
             game.initialise()
             score = game.play_puzzle()
@@ -383,6 +386,7 @@ def main():
             print(Fore.GREEN + msg)
             print(Fore.WHITE)
             answer = question.answer("> Want to play another puzzle (y/n)?\n")
+            # Display and update leader board when score is within top 5
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
