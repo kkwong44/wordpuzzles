@@ -353,19 +353,20 @@ class Question:
     """
     Validate user answer from input question
     """
-    def __init__(self, question):
-        self.question = question
+    def __init__(self):
+        self.question = ""
 
-    def answer(self):
+    def answer(self, question):
         """
         Ask question and return answer
         """
+        self.question = question
         answer = ""
         while answer not in ("Y", "N"):
             if answer == "":
                 answer = input(self.question).upper()
             if answer not in ("Y", "N"):
-                print("> Invalid Entry!")
+                print("\n> Invalid Entry!")
                 answer = input("> Please enter (y/n):\n").upper()
         return answer
 
@@ -377,8 +378,8 @@ def main():
     game = Game(6)
     game.display_leaderboard(None)
     print(Fore.WHITE)
-    question = Question("> Are you ready to play (y/n)?\n")
-    answer = question.answer()
+    question = Question()
+    answer = question.answer("> Are you ready to play (y/n)?\n")
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
         print("   You have 3 attempts to solve the puzzle.")
@@ -394,8 +395,7 @@ def main():
             msg = f"    You have solved {solved} out of {puzzles}"
             print(Fore.GREEN + msg)
             print(Fore.WHITE)
-            question = Question("> Want to play another puzzle (y/n)?\n")
-            answer = question.answer().upper()
+            answer = question.answer("> Want to play another puzzle (y/n)?\n")
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
@@ -404,7 +404,7 @@ def main():
                 print(Style.RESET_ALL)
                 break
     else:
-        print("> You have exited the game.")
+        print("\n> You have exit the game.")
         print(Style.RESET_ALL)
 
 
