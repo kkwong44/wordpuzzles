@@ -250,7 +250,7 @@ class Game:
         print(" ! Enter your answer when you found the word.        !")
         print(" !                                                   !")
         print("  =================================================== ")
-        print()
+        print(Style.RESET_ALL)
 
     def initialise(self):
         """
@@ -365,9 +365,8 @@ def main():
     """
     game = Game(6)
     game.display_leaderboard(None)
-    print(Fore.WHITE)
     question = Question()
-    answer = question.answer("> Are you ready to play (y/n)?\n")
+    answer = question.answer(Fore.WHITE + "> Are you ready to play (y/n)?\n")
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
         print("   You have 3 attempts to solve the puzzle.")
