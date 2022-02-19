@@ -35,21 +35,6 @@ class ImportSheet():
     def __init__(self, sheet):
         self.sheet = sheet
 
-    def get_word(self):
-        """
-        Get a word from worksheet
-        """
-        word_prop = {}
-        sheet = SHEET.worksheet(self.sheet)
-        total_words = sheet.acell("D1").value
-        row_id = random.randint(1, int(total_words))
-        row_values = sheet.row_values(row_id)
-        word_prop.update({"type": row_values[0]})
-        word_prop.update({"length": row_values[1]})
-        word_prop.update({"name": row_values[2]})
-
-        return word_prop
-
     def all_into_dict(self):
         """
         Import all values from worksheet into dictionary
