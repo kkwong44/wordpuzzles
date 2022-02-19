@@ -53,8 +53,8 @@ class ImportSheet():
         """
         Display dictionary on terminal as a table
         """
-        print(Fore.MAGENTA, Style.BRIGHT + "  " + self.sheet.capitalize())
-        print()
+        title = self.sheet.capitalize()
+        print(Fore.MAGENTA + Style.BRIGHT + "   " + title + "\n")
         for dictionary in dicts:
             line = ""
             for key, value in dictionary.items():
