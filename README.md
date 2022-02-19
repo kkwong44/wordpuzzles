@@ -220,7 +220,38 @@ The following features can be developed in the future to add values to the game 
 * Add extra hidden words in puzzle
 ___
 ## Data Model
+The data model for this project is based on classes.
 
+*A class “ImportSheet” is used to access the spreadsheet*
+* Method to read and import data from worksheet to list
+* Method to display imported list to terminal as a table
+* Method to update worksheet
+
+*A class “Grid” is used for the basic grid.*
+* Method to create Puzzle and Answer grid.
+* Method to display Puzzle and Answer grid.
+
+*A class “ModifyGrid” is used to modify the basic grid.*
+* Method to insert hidden word in both puzzle and answer grids,
+* Method to get answer from player
+* Method to give hints
+
+*A class “Game” is used for the game*
+* Method to initialize the game
+* Method to display the leader board
+* Method to play puzzle
+* Method to check leader board
+
+*A class “Question”for questions*
+* Method to response question
+
+*Main function “main” to run the game*
+* Run game from start till player end the game
+* Ask player to play game
+* Check player answers and act accordingly
+* Tally player’s score
+* Check player’ score against leader board
+* Update leader board appropriately at the end of the game
 ___
 ## Validator Testing
 
