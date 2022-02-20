@@ -60,9 +60,11 @@ class ImportSheet:
             for key, value in dictionary.items():
                 if key == "success_rate":
                     rate = "{:.1%}"
-                    line += "   " + str(key) + ": " + str(rate.format(value))
+                    line += str(key) + ": " + str(rate.format(value))
+                elif key == "rank":
+                    line += "   " + str(key) + ": " + str(value).ljust(4)
                 else:
-                    line += "   " + str(key) + ": " + str(value)
+                    line += str(key) + ": " + str(value).ljust(5)
                 if key == "rank" and value == ranking:
                     highlight = True
                 if key == "rank" and value != ranking:
