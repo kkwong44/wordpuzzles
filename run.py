@@ -392,7 +392,7 @@ def main():
     game.display_leaderboard(None)
     question = Question()
     user = question.simulation()
-    # Check if the game is ruuning in simulation mode
+    # Check if the game is running in simulation mode
     if user == "Admin":
         print("   *** This is a simulation ***")
         answer = "Y"
@@ -416,7 +416,17 @@ def main():
             msg = f"    You have solved {solved} out of {puzzles}"
             print(Fore.GREEN + msg)
             print(Fore.WHITE)
-            answer = question.answer("> Want to play another puzzle (y/n)?\n")
+            string = "> Want to play another puzzle (y/n)?"
+            # Run 100 times for simulation
+            if user == "Admin":
+                print(string)
+                if puzzles == 100:
+                    answer = "N"
+                else:
+                    answer = "Y"
+                print(answer)
+            else:
+                answer = question.answer(string + "\n")
             # Display and update leader board when score is within top 5
             if answer == "N":
                 rank = game.check_leaderboard(final_score, solved, puzzles)
