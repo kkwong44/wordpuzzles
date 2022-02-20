@@ -28,7 +28,7 @@ except gspread.exceptions.SpreadsheetNotFound:
     sys.exit()
 
 
-class ImportSheet():
+class ImportSheet:
     """
     Access worksheet in spreadsheet and import data into a list
     """
@@ -379,7 +379,7 @@ class Question:
         For auto testing use "Admin" as user to simulate player
         """
         self.question = "Is it Player or Admin playing the game"
-        user = "Admin"
+        user = "Player"
         return user
 
 
