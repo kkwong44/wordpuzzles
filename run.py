@@ -368,6 +368,14 @@ class Question:
                 answer = input("> Please enter (y/n):\n").upper()
         return answer
 
+    def simulation(self):
+        """
+        For auto testing use "Admin" as user to simulate player
+        """
+        self.question = "Is it Player or Admin playing the game"
+        user = "Admin"
+        return user
+
 
 def main():
     """
@@ -377,7 +385,14 @@ def main():
     game = Game(grid_dimension)
     game.display_leaderboard(None)
     question = Question()
-    answer = question.answer(Fore.WHITE + "> Are you ready to play (y/n)?\n")
+    user = question.simulation()
+    # Check if the game is ruuning in simulation mode
+    if user == "Admin":
+        print("   *** This is a simulation ***")
+        answer = "Y"
+    else:
+        string = "> Are you ready to play (y/n)?\n"
+        answer = question.answer(Fore.WHITE + string)
     # Run Puzzle
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
