@@ -190,7 +190,7 @@ class ModifyGrid:
         answer = answers[i]
         return answer
 
-    def get_answer(self, grid):
+    def get_answer(self, grid, user):
         """
         Ask and check player's answer. Three attempts allow for each game.
         """
@@ -199,8 +199,14 @@ class ModifyGrid:
         wsize = len(word)
         score = 0
         for attempt in range(3):
-            # Get answer from player
-            answer = input(Fore.WHITE + "> Enter your answer here:\n").upper()
+            if user == "Admin":
+                print(Fore.WHITE + "> Enter your answer here:")
+                answer = self.auto_answer()
+                print(answer)
+            else:
+                # Get answer from player
+                answer = input(Fore.WHITE + "> Enter your answer here:\n")
+                answer = answer.upper()
             if answer == word:
                 print(Fore.GREEN)
                 print(f'    Well Done! You have found the word "{word}".\n')
@@ -279,7 +285,7 @@ class Game:
         scores_dict = self.import_scores.all_into_dict()
         self.import_scores.display_dict(scores_dict, ranking)
 
-    def play_puzzle(self):
+    def play_puzzle(self, user):
         """
         Create puzzle game for player to play
         """
@@ -306,7 +312,7 @@ class Game:
         print(Fore.GREEN + str1 + str2)
         self.grid.display(self.puzzle_grid)
         # Ask and check answer
-        score = new_grids.get_answer(self.grid)
+        score = new_grids.get_answer(self.grid, user)
         self.grid.display(self.answer_grid)
         return score
 
@@ -402,7 +408,7 @@ def main():
         # Create new puzzle and tally score till the game end
         while True:
             game.initialise()
-            score = game.play_puzzle()
+            score = game.play_puzzle(user)
             solved += score
             puzzles += 1
             rate = round((solved / puzzles) / 10, 4)
