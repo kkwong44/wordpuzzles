@@ -374,12 +374,15 @@ class Question:
                 answer = input("> Please enter (y/n):\n").upper()
         return answer
 
-    def simulation(self):
+    def simulation(self, on_off):
         """
-        For auto testing use "Admin" as user to simulate player
+        To simulate playing the game, set user to "Admin" otherwise "Player"
         """
-        self.question = "Is it Player or Admin playing the game"
-        user = "Player"
+        self.question = "Is this a simulation?"
+        if on_off is True:
+            user = "Admin"
+        else:
+            user = "Player"
         return user
 
 
@@ -391,8 +394,8 @@ def main():
     game = Game(grid_dimension)
     game.display_leaderboard(None)
     question = Question()
-    user = question.simulation()
     # Check if the game is running in simulation mode
+    user = question.simulation(False)
     if user == "Admin":
         print("   *** This is a simulation ***")
         answer = "Y"
