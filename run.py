@@ -180,6 +180,16 @@ class ModifyGrid:
         hint = word[:attempt + 1]
         print('    Hint: The word begins with "' + hint + '"\n')
 
+    def auto_answer(self):
+        """
+        Create answer automatically for auto testing
+        """
+        word = self.add_word.get("name")
+        answers = [word, "STR", "STRING", "WORD", "WORDS", word]
+        i = random.randint(0, 5)
+        answer = answers[i]
+        return answer
+
     def get_answer(self, grid):
         """
         Ask and check player's answer. Three attempts allow for each game.
