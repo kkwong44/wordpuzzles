@@ -363,8 +363,8 @@ def main():
     """
     Main section to run program
     """
-    grid_size = 6
-    game = Game(grid_size)
+    grid_dimension = 6
+    game = Game(grid_dimension)
     game.display_leaderboard(None)
     question = Question()
     answer = question.answer(Fore.WHITE + "> Are you ready to play (y/n)?\n")
