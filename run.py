@@ -365,23 +365,25 @@ class Question:
     def answer(self, question):
         """
         Ask question and return a valid answer
+        Simulation is a special word for tester
         """
         self.question = question
         answer = ""
-        while answer not in ("Y", "N"):
+        while answer not in ("Y", "N", "SIMULATION"):
             if answer == "":
                 answer = input(self.question).upper()
-            if answer not in ("Y", "N"):
+            if answer not in ("Y", "N", "SIMULATION"):
                 print("\n> Invalid Entry!")
                 answer = input("> Please enter (y/n):\n").upper()
         return answer
 
-    def simulation(self, on_off):
+    def simulation(self):
         """
         To simulate playing the game, set user to "Admin" otherwise "Player"
         """
-        self.question = "Is this a simulation?"
-        if on_off is True:
+        question = "> Do you want to run simulation for 100 puzzles (y/n)?\n"
+        answer = self.answer(question)
+        if answer == "Y":
             user = "Admin"
         else:
             user = "Player"
@@ -392,18 +394,20 @@ def main():
     """
     Main section to run program
     """
+    user = "Player"
     grid_dimension = 6
     game = Game(grid_dimension)
     game.display_leaderboard(None)
     question = Question()
-    # Check if the game is running in simulation mode
-    user = question.simulation(False)
-    if user == "Admin":
-        print("   *** This is a simulation ***")
-        answer = "Y"
-    else:
-        string = "> Are you ready to play (y/n)?\n"
-        answer = question.answer(Fore.WHITE + string)
+    string = "> Are you ready to play (y/n)?\n"
+    answer = question.answer(Fore.WHITE + string)
+    # "SIMULATION" is a special word for entering the simulation mode
+    if answer == "SIMULATION":
+        user = question.simulation()
+        if user == "Admin":
+            answer = "Y"
+        else:
+            answer = "N"
     # Run Puzzle
     if answer == "Y":
         print(Fore.GREEN + "\n   Below is a puzzle with a hidden word.")
@@ -422,7 +426,7 @@ def main():
             print(Fore.GREEN + msg)
             print(Fore.WHITE)
             string = "> Want to play another puzzle (y/n)?"
-            # Run 100 times for simulation
+            # Run 100 times for simulation else ask player
             if user == "Admin":
                 print(string)
                 if puzzles == 100:
@@ -433,7 +437,7 @@ def main():
             else:
                 answer = question.answer(string + "\n")
             # Display and update leader board when score is within top 5
-            if answer == "N":
+            if answer in ("N", "SIMULATION"):
                 rank = game.check_leaderboard(final_score, solved, puzzles)
                 if rank > 0:
                     game.display_leaderboard(rank)
