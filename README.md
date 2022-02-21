@@ -311,3 +311,16 @@ The tools used to carry out the development and deployment on this project are:
 * Heroku
 ___
 ## Credits
+* The deployment mock terminal was created by Code Institute and the template from https://github.com/Code-Institute-Org/gitpod-full-template
+* List of words are from WORDMOM - https://www.wordmom.com/
+* Wikipedia on wordsearch - https://en.wikipedia.org/wiki/Word_search
+* Python programming are based on references, examples and techniques from W3Schools - https://www.w3schools.com/python/default.asp
+* gspread usage - https://docs.gspread.org/en/latest/user-guide.html
+* numpy - https://numpy.org/
+* colorama - https://pypi.org/project/colorama/
+___
+## Acknowledgment
+I would like to thank the following to support the development of this site.
+
+* Learning Support - Code Institute
+* Mentoring Support - Daisy McGirr
