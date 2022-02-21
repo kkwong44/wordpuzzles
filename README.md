@@ -254,10 +254,21 @@ The data model for this project is based on classes.
 * Update leader board appropriately at the end of the game
 ___
 ## Validator Testing
+PEP8 linter online checker was used to check the python code and it has passed the test.
 
+![PEP8 Report](readme/testing/pep8-report.png)
 ___
 ## Testing
+The following tests were manually executed to test the functionalities of the game.
 
+One of the tests is a simulation to run 100 puzzles by itself.
+
+The results are as expected and pass on both manual and simulation testing.
+
+![Test Report 1](readme/testing/test-report-1.png)
+![Test Report 2](readme/testing/test-report-2.png)
+![Test Report 3](readme/testing/test-report-3.png)
+![Test Report 4](readme/testing/test-report-4.png)
 ___
 ## Unfix Bugs
 There are no known bugs to be fixed.
