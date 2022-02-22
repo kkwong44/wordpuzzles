@@ -5,9 +5,9 @@ This is simple game based on classic Word Search Puzzles, more information about
 
 Click [here](https://kk-wordpuzzle.herokuapp.com) to access live site.
 
-*Screenshot - Mockup on WordPuzzles, generated from [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php)*
+*Mock Terminal - Simulation on WordPuzzles, recorded with Xbox Game Bar*
 
-![Screenshot on Mockup](readme/images/mockup.png)
+![Simulation on Mockup](readme/images/mockup-simulation.gif)
 ___
 
 ## Objectives
@@ -317,9 +317,12 @@ The tools used to carry out the development and deployment on this project are:
 * Google Drive and Google Spreadsheet
 * Python modules and external libraries such as Numpy
 * Chrome Dev Tools
-* PEP8 online checker
 * Webpage Screenshots - Chrome app extension (FireShot)
-* Heroku
+* [Lucid Chart](https://www.lucidchart.com/)
+* [PEP8 online checker](http://pep8online.com/)
+* [Heroku](https://id.heroku.com/login)
+* [Xbox Game Bar](https://www.microsoft.com/en-us/p/xbox-game-bar/9nzkpstsnw4p?activetab=pivot:overviewtab) was used to records the screen
+* [ezgif.com](https://ezgif.com/) was used to convert mp4 to a gif
 ___
 ## Credits
 * The deployment mock terminal was created by Code Institute and the template from https://github.com/Code-Institute-Org/gitpod-full-template
