@@ -140,7 +140,17 @@ The player's response will be validated and only accept "Y" or "N". Case is not 
 
 * There is no suggestion in the game to run simulation but at this point tester can run simulation by entering the word “simulation”. This will give tester an option to run 100 puzzles automatically.
 
+    *Example on entering into simulation mode*
+
+    ![Screenshot on Simulation Mode](readme/screenshots/simulation1.png)
+
+    *Example when simulation end*
+
+    ![Screenshot on Simulation Run](readme/screenshots/simulation2.png)
+
 A puzzle grid with the hidden word will be presented when the player decided to continue to play the game.
+
+*Example when player continue to play*
 
 ![Screenshot on Puzzle Grid](readme/screenshots/puzzle-grid.png)
 
