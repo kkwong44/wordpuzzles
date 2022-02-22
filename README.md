@@ -27,14 +27,17 @@ The target audients will be players that wish to test their skills to find the h
 ___
 ## How to Play
 * Instruction will be given to the player at the beginning of the game.
+* The aim of the game is to find a hidden word in a puzzle grid
 * For each puzzle, a clue about the hidden word is display on the screen.
 * Base on the clue, player need to find the word in the puzzle grid.
 * Solve the puzzle by entering the answer.
 * If the answer is correct then option is given to solve another puzzle.
-* If answer incorrect then player can try again with another answer.
+* If answer incorrectly then player can try again with another answer.
 * Only 3 attempts allow for each puzzle. Extra clue will be given to each attempt.
 * The answer always shows at the end of each puzzle and display where the hidden word is on the grid.
-Also, at the end of each puzzle, score will be displayed with option to play another puzzle.
+* At the end of each puzzle, score will be displayed with option to play another puzzle.
+* A new puzzle will be displayed when player choose to continue otherwise the game end.
+* Total score will be displayed when the game end and a new leaderboard also will be displayed if the score is rank top 5.
 ___
 ## Game Design
 
@@ -51,12 +54,12 @@ A process flow chart was created to show the basic processes and logics of the g
 The following are the main processes to run the game.
 * Display description and game instruction
 * Display leader board for top 5 ranking
-* Ask player to play game
+* Ask player to play game or entering into simulation by the tester with a special word
 * Select a random word for each puzzle
 * Create puzzle grid and answer grid with random base values
 * The selected word needs to be inserted randomly for each puzzle
 * Display puzzle grid with clues about the word
-* Ask player to enter answer
+* Ask player to enter an answer or answer automatically in simulation mode
 * Validation on each answer and return result to player
 * Allow 3 attempts to solve each puzzle
 * Give further clue for each attempt
@@ -122,7 +125,7 @@ At the beginning of the game, a validation process will be carried out to check 
 Then follow by displaying the leader board with the top 5 ranking.
 
 The information on the leader board is also held in an external worksheet called "leaderboard". This information is imported and load it into a list of dictionaries.
-* Validation will be check against worksheet
+* Validation will be check against this worksheet
 * Exit program with error message when worksheet does not exist
 
 The game will pause at this point and wait for the player’s input response to continue or exit the game.
@@ -131,7 +134,11 @@ The game will pause at this point and wait for the player’s input response to 
 
 The player's response will be validated and only accept "Y" or "N". Case is not sensitive as the letter will be converted to uppercase. For invalid entry, a message with "Invalid Entry" will display and ask to enter "y/n".
 
-If the response is "N" then the game will be terminated with a message saying "You have exit the game".
+* Player can continue the game by entering “Y”
+
+* If the response is "N" then the game will be terminated with a message saying "You have exit the game".
+
+* There is no suggestion in the game to run simulation but at this point tester can run simulation by entering the word “simulation”. This will give tester an option to run 100 puzzles automatically.
 
 A puzzle grid with the hidden word will be presented when the player decided to continue to play the game.
 
@@ -139,14 +146,14 @@ A puzzle grid with the hidden word will be presented when the player decided to 
 
 The following processes will be carried out to create each puzzle:
 
-* Load the words from an external spreadsheet into a list of dictionaries. This action only performs once at the beginning of the game
-    * Validation will be check against worksheet
+* Import and load the words from an external worksheet "words" into a list of dictionaries. This action only performs once at the beginning of the game
+    * Validation will be check against this worksheet
     * Exit program with error message when worksheet does not exist
 * Create 2 puzzle grids with base values
     * A 6x6 puzzle grid populated with random alphabet
     * A 6x6 answer grid populated with “-“
 * Select a word randomly from the list of dictionaries 
-    * There is a validation on the length of the word before it can be inserted into the grid. This to ensure the word lemgth is no longer than the grid size. If validation failed then it will try another word from the list. It will attempt for 100 times before exit the game with an error message.
+    * There is a validation on the length of the word before it can be inserted into the grid. This to ensure the word length is no longer than the grid size. If validation failed then it will try another word from the list. It will attempt for 100 times before exit the game with an error message.
 * Perform below criteria to insert the word identically into both the puzzle and answer grid
     * Randomly select the direction to place the word horizontally or vertically
     * Randomly spell the word normally or backward
@@ -155,7 +162,7 @@ The following processes will be carried out to create each puzzle:
 * For all puzzles, display a clue about the word (type and length of word)
     * Currently, the list contains words with 4 or 5 letters and it could be a name of an Animal, a Bird or a Fruit
 
-At this point, the game will pause and ask player to enter an answer
+At this point, the game will pause and ask player to enter an answer. In simulation mode, a random answer based on the puzzle word will be generated so it can automatically answer this question with either a correct or an incorrect answer.
 
 Player can enter anything at this point but a basic validation on length will be carried out before comparing the answer. Also, all answers will be converted to upper case.
 
@@ -180,7 +187,7 @@ The validation and checking the answer are as follows:
     *Example - A correct answer*
 
     ![Screenshot on Answer Correct](readme/screenshots/answer-correct.png)
-* When the answer is incorrect then it will display an incorrect message and perform the following processes *(see previous screenshots)*:
+* When the answer is incorrect then it will display an incorrect message and perform the following processes *(messages as shown in previous screenshots)*:
     * Display original clue
     * Display an additional clue with the first letter of the word
     * Display the puzzle grid again
@@ -207,6 +214,8 @@ The ranking calculation is based on the following:
 * Success rate is a percentage which calculated by (number of solved puzzle / Total number of puzzles played) * 100
 
 The external worksheet will be updated with the new leader board scores.
+* Validation on worksheet "leaderboard" will be checked
+* Exit program with error message when worksheet does not exist
 
 *Example - Rank Top 5*
 
@@ -241,10 +250,11 @@ The data model for this project is based on classes.
 * Method to initialize the game
 * Method to display the leader board
 * Method to play puzzle
-* Method to check leader board
+* Method to check score against leader board
 
 *A class “Question”for questions*
 * Method to response question
+* Method for tester to entering into simulation mode
 
 *Main function “main” to run the game*
 * Run game from start till player end the game
@@ -275,7 +285,7 @@ ___
 There are no known bugs to be fixed.
 ___
 ## Deployment
-This project will be deployed in Heroku and use a mock terminal to run the program.
+This project has been deployed in Heroku and use a mock terminal to run the program.
 
 In order to run this program, the dependencies on this project also need to be deployed. This is done by submitting the following command to create the requirement.txt file.
 * pip3 freeze > requirements.txt
