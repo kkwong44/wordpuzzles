@@ -328,14 +328,14 @@ The tools used to carry out the development and deployment on this project are:
 * Python modules and external libraries such as Numpy
 * Chrome Dev Tools
 * Webpage Screenshots - Chrome app extension (FireShot)
-* [Lucid Chart](https://www.lucidchart.com/)
-* [PEP8 online checker](http://pep8online.com/)
-* [Heroku](https://id.heroku.com/login)
+* [Lucid Chart](https://www.lucidchart.com/) for creating flow chart
+* [PEP8 online checker](http://pep8online.com/) for code validation
+* [Heroku](https://id.heroku.com/login) for building, deploying, and managing apps
 * [Xbox Game Bar](https://www.microsoft.com/en-us/p/xbox-game-bar/9nzkpstsnw4p?activetab=pivot:overviewtab) was used to records the screen
 * [ezgif.com](https://ezgif.com/) was used to convert mp4 to a gif
 ___
 ## Credits
-* [Template](https://github.com/Code-Institute-Org/gitpod-full-template) created by [Code Institue](https://codeinstitute.net/) for running mock terminal in deployment
+* [Template](https://github.com/Code-Institute-Org/gitpod-full-template) created by [Code Institute](https://codeinstitute.net/) for running mock terminal in deployment
 * [WORDMOM](https://www.wordmom.com/) website for List of words
 * [Wikipedia](https://en.wikipedia.org/wiki/Word_search) on wordsearch
 * [W3Schools](https://www.w3schools.com/python/default.asp) for research, examples and techniques in Python programming
