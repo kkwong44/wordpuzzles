@@ -5,6 +5,10 @@ This is simple game based on classic Word Search Puzzles, more information about
 
 Click [here](https://kk-wordpuzzle.herokuapp.com) to access live site.
 
+*Screenshot - Mockup on WordPuzzles App, generated from [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php)*
+
+![Screenshot on Mockup](readme/images/mockup.png)
+
 *Mock Terminal - Simulation on WordPuzzles, recorded with Xbox Game Bar*
 
 ![Simulation on Mockup](readme/images/mockup-simulation.gif)
@@ -27,7 +31,7 @@ The target audients will be players that wish to test their skills to find the h
 ___
 ## How to Play
 * Instruction will be given to the player at the beginning of the game.
-* The aim of the game is to find a hidden word in a puzzle grid
+* The aim of the game is to find a hidden word in a puzzle grid.
 * For each puzzle, a clue about the hidden word is display on the screen.
 * Base on the clue, player need to find the word in the puzzle grid.
 * Solve the puzzle by entering the answer.
@@ -37,7 +41,7 @@ ___
 * The answer always shows at the end of each puzzle and display where the hidden word is on the grid.
 * At the end of each puzzle, score will be displayed with option to play another puzzle.
 * A new puzzle will be displayed when player choose to continue otherwise the game end.
-* Total score will be displayed when the game end and a new leaderboard also will be displayed if the score is rank top 5.
+* Total score will be displayed when the game end and a new leader board will also be displayed if the score is rank top 5.
 ___
 ## Game Design
 
@@ -70,13 +74,13 @@ ___
 
 ## Program Requirements
 
-This project will be developed from a template created by Code Institute which allows python programs to run in a mock terminal.
+This project was developed from a template created by Code Institute which allows python programs to run in a mock terminal.
 
-From the design, this project is going to use a google drive and google sheet name “words” to store data for the game.
-* A worksheet name “words” is used to store a list of words with its attributes. The process to populate this sheet is done by either manually type it in or copy and paste from external sources. This program only requires read access to this worksheet.
-* A worksheet name “leaderboard” is used to store the top 5 ranking scores. Initially, all scores are set to zero and it will be updated by the game. For this reason, the program requires both read and write access to this worksheet.
+From the design, this project is going to use a Google Drive and Google Sheet named “words” to store data for the game.
+* A worksheet named “words” is used to store a list of words with its attributes. The process to populate this sheet is done by either manually type it in or copy and paste from external sources. This program only requires read access to this worksheet.
+* A worksheet named “leaderboard” is used to store the top 5 ranking scores. Initially, all scores are set to zero and it will be updated by the game. For this reason, the program requires both read and write access to this worksheet.
 
-In order to use google drive and google sheets, authentication and credentials set up are needed before it can be accessed by the program. The following is a brief summary to activate the APIs:
+In order to use Google Drive and Google Sheets, authentication and credentials set up are needed before it can be accessed by the program. The following is a summary of procedure to activate the APIs:
 * Go to the Google Cloud Platform webpage and login to an account
 * Create a new project
 * Select library under APIs and services
@@ -84,7 +88,7 @@ In order to use google drive and google sheets, authentication and credentials s
 * Create credentials and download credential json file to be used in the project
 * Go back to the library, select and enable Google Sheet API
 * Upload the credential jason file into the project repository and ensure the file is not share publicly
-* Use the client email from the credential jason file to share the google sheet
+* Use the client email from the credential jason file to share the Google Sheet
 
 To use Google Sheet API, 2 dependencies are needed to install into the project.
 * Authentication to access the Google Cloud Project
@@ -93,6 +97,8 @@ To use Google Sheet API, 2 dependencies are needed to install into the project.
 The command to install these packages is "pip3 install gspread google-auth"
 
 After the packages have been installed then it needs to be imported into the python program file with an IAM configuration. The following is the section of the code required to access the spreadsheet.
+
+The following section of code was used and it is originated from Code Institute Love Sandwich project.
 
 >import gspread
 >
@@ -115,10 +121,20 @@ The following libraries or modules are also needed to run the program.
 * sys (module for System-specific parameters and function)
 * numpy (library for scientific computing with Python)
 * colorama (for producing colored terminal text)
+
+The reasons to use these libraries and modules are to perform specific tasks as listed below.
+* random method is use from the random library
+* The exit() method is use from the sys library to exit program cleanly
+* gspread is use to access Google Sheet
+* google.oauth2.service_account is use for Credentials
+* numpy is use for setting up the base values for the grids and update worksheet
+* colorama is use to make colour text on terminal
 ___
 
 ## Features
 At the beginning of the game, a validation process will be carried out to check the existence of the import spreadsheet. The game will terminate and exit the program with an error message if it can't find the file. When access to the spreadsheet is available then the player will be greeted with a short description and instruction about the game.
+
+*Example on Description and Instruction*
 
 ![Screenshot on Description](readme/screenshots/description.png)
 
@@ -130,6 +146,8 @@ The information on the leader board is also held in an external worksheet called
 
 The game will pause at this point and wait for the player’s input response to continue or exit the game.
 
+*Example on Leader Board*
+
 ![Screenshot on Leader Board](readme/screenshots/leaderboard.png)
 
 The player's response will be validated and only accept "Y" or "N". Case is not sensitive as the letter will be converted to uppercase. For invalid entry, a message with "Invalid Entry" will display and ask to enter "y/n".
@@ -138,7 +156,7 @@ The player's response will be validated and only accept "Y" or "N". Case is not 
 
 * If the response is "N" then the game will be terminated with a message saying "You have exit the game".
 
-* There is no suggestion in the game to run simulation but at this point tester can run simulation by entering the word “simulation”. This will give tester an option to run 100 puzzles automatically.
+* There is no suggestion in the game to run simulation but at this point, tester can run the game in a simulation mode by entering the word “simulation”. This will give tester an option to run 100 puzzles automatically.
 
     *Example on entering into simulation mode*
 
@@ -207,9 +225,9 @@ The validation and checking the answer are as follows:
     * If the answer still incorrect then the process repeats with second letter of the word as an additional clue and indicate there is 1 more attempt left. Player ask to enter another answer.
     * The validation and checking will repeat against the final answer
     * If the answer still incorrect then it will show the answer is wrong and display the puzzle word with the answer grid showing where the word was hidden.
-* A score tally will display at the end of each puzzle
-* Also, an option is available to play another puzzle
-* The processes will repeat and create a new puzzle grid if the player choose to play again. Otherwise the game will end with a message.
+* A score tally will display at the end of each puzzle.
+* Also, an option is available to play another puzzle.
+* The processes will repeat and create a new puzzle grid if the player choose to play again. Otherwise, the game will end with a message.
 
 When the player wishes to end the game, the score in this session will compare the scores in the leader board before displaying a message to thank the player for playing the game.
 
@@ -284,20 +302,63 @@ The following tests were manually executed to test the functionalities of the ga
 
 One of the tests is a simulation to run 100 puzzles by itself.
 
-The results are as expected and pass on both manual and simulation testing.
+All built in exception handlings were tested and passed.
+
+The test results are as expected and passed on both manual and simulation testing.
+
+*Test Report*
 
 ![Test Report 1](readme/testing/test-report-1.png)
 ![Test Report 2](readme/testing/test-report-2.png)
 ![Test Report 3](readme/testing/test-report-3.png)
 ![Test Report 4](readme/testing/test-report-4.png)
 ___
-## Unfix Bugs
+## Bugs
+**Bugs Identified and Resolved**
+
+*Bug Fixed on Google Sheet Request Access Limitation*
+
+* Initially, the puzzle word was randomly selected from the external spreadsheet directly for each puzzle. This is fine until a load test was carried out by selecting a random word in quick successions. It was noticed from the load test that Google Sheet has a limitation on number of request access for each minute. This cause the test failed and the program aborted with error messages.
+
+* To eliminate this potential problem, the process for getting a random word has changed from the spreadsheet. The solution is to import the list of words from the worksheet into a list of dictionaries at the beginning of the game. This means the program can now selecting a random word from memory rather than from an external source.
+
+* When implementing the above solution, it was found the process was working fine until load test was carried out. Again, it was the limitation on access to Google Sheet. This bug was identified due to the fact this process was executed inside the initialisation for each puzzle. This means the program is trying to import the list from the worksheet for each puzzle. The solution for this problem is to relocate this action outside the initialisation stage.
+
+*Bug Fixed on Leader Board Calculation*
+
+* During development it was found there is a bug with the leader board that it updates the result incorrectly. Basically, the logic for calculating the best score was wrong. Initially, the best score was calculated by adding the number of puzzles solved and the success rate together but the logic did not take into account for 100% success rate. The logic is to convert the percentage to (0 to 1) meaning 1 is 100% before adding to the number of puzzles solved. So effectively the number of puzzles solved will increase by 1 when the success rate is 100% which causing the wrong results on the leader board. This problem was fixed by changing the logic in the calculation.
+
+**Unfix Bugs**
+
 There are no known bugs to be fixed.
 ___
 ## Deployment
 This project has been deployed in Heroku and use a mock terminal to run the program.
+### Tools
+* GitHub is a code hosting platform for version control and collaboration
+* Gitpod is a ready-to-code developer environment
+* Heroku for building, deploying, and managing apps
 
-In order to run this program, the dependencies on this project also need to be deployed. This is done by submitting the following command to create the requirement.txt file.
+### Development processes
+
+* All the development works are carried out in Gitpod
+* Create a repository in Github through Gitpod
+* Start the project from a template written by Code Institute. The full template can be copied from [here](https://github.com/Code-Institute-Org/python-essentials-template)
+
+    **Repeat the following until project completion**
+
+* Developing your site, save your project in your Gitpod workspaces
+* Use git add command to add files to local repository
+* Use git commit command to commit the changes to local repository
+
+### Deployment to Github Pages
+
+* Use git push to upload local repository content (Gitpod) to a remote repository (Github)
+* The deployed app only use the latest code that has been pushed to Github
+
+### Deployment to Heroku
+
+In order to run this program in Heroku, the dependencies on this project also need to be deployed. This is done by submitting the following command to create the requirement.txt file.
 * pip3 freeze > requirements.txt
 
 The requirements.txt will includes dependencies for Google authentication, gspread, numpy, sys, PyPi modules and colorama.
@@ -320,6 +381,10 @@ The following are the steps to deploy the project to Heroku.
 10. Click "Open App" at the top when its finished deploy the app. A new tab page will open with your application.
 
 The deployed app can be found [here](https://kk-wordpuzzle.herokuapp.com).
+
+***You can use GitHub Desktop to clone and fork repositories that exist on GitHub.***
+
+Click [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop) for more information on Cloning and forking repositories from GitHub Desktop.
 ___
 ## Tools
 The tools used to carry out the development and deployment on this project are:
@@ -335,7 +400,7 @@ The tools used to carry out the development and deployment on this project are:
 * [ezgif.com](https://ezgif.com/) was used to convert mp4 to a gif
 ___
 ## Credits
-* [Template](https://github.com/Code-Institute-Org/gitpod-full-template) created by [Code Institute](https://codeinstitute.net/) for running mock terminal in deployment
+* [Template](https://github.com/Code-Institute-Org/python-essentials-template) created by [Code Institute](https://codeinstitute.net/) for running mock terminal in deployment
 * [WORDMOM](https://www.wordmom.com/) website for List of words
 * [Wikipedia](https://en.wikipedia.org/wiki/Word_search) on wordsearch
 * [W3Schools](https://www.w3schools.com/python/default.asp) for research, examples and techniques in Python programming
