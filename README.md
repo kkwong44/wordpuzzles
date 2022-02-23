@@ -335,13 +335,13 @@ The tools used to carry out the development and deployment on this project are:
 * [ezgif.com](https://ezgif.com/) was used to convert mp4 to a gif
 ___
 ## Credits
-* The deployment mock terminal was created by Code Institute and the template from https://github.com/Code-Institute-Org/gitpod-full-template
-* List of words are from WORDMOM - https://www.wordmom.com/
-* Wikipedia on wordsearch - https://en.wikipedia.org/wiki/Word_search
-* Python programming are based on references, examples and techniques from W3Schools - https://www.w3schools.com/python/default.asp
-* gspread usage - https://docs.gspread.org/en/latest/user-guide.html
-* numpy - https://numpy.org/
-* colorama - https://pypi.org/project/colorama/
+* [Template](https://github.com/Code-Institute-Org/gitpod-full-template) created by [Code Institue](https://codeinstitute.net/) for running mock terminal in deployment
+* [WORDMOM](https://www.wordmom.com/) website for List of words
+* [Wikipedia](https://en.wikipedia.org/wiki/Word_search) on wordsearch
+* [W3Schools](https://www.w3schools.com/python/default.asp) for research, examples and techniques in Python programming
+* [gspread](https://docs.gspread.org/en/latest/user-guide.html) examples and usage
+* [numpy](https://numpy.org/) examples and usage
+* [colorama](https://pypi.org/project/colorama/) examples and usage
 ___
 ## Acknowledgment
 I would like to thank the following to support the development of this site.
