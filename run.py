@@ -372,9 +372,18 @@ class Question:
         while answer not in ("Y", "N", "SIMULATION"):
             if answer == "":
                 answer = input(self.question).upper()
-            if answer not in ("Y", "N", "SIMULATION"):
-                print("\n> Invalid Entry!")
-                answer = input("> Please enter (y/n):\n").upper()
+            # Simulation mode only allow when the game starts
+            if "ready to play" in question:
+                if answer not in ("Y", "N", "SIMULATION"):
+                    print("\n> Invalid Entry!")
+                    answer = input("> Please enter (y/n):\n").upper()
+            else:
+                if answer not in ("Y", "N"):
+                    print("\n> Invalid Entry!")
+                    answer = input("> Please enter (y/n):\n").upper()
+                    # Simulation is not allow for other questions
+                    if answer == "SIMULATION":
+                        answer = "Invalid"
         return answer
 
     def simulation(self):
