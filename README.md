@@ -312,6 +312,9 @@ The test results are as expected and passed on both manual and simulation testin
 ![Test Report 2](readme/testing/test-report-2.png)
 ![Test Report 3](readme/testing/test-report-3.png)
 ![Test Report 4](readme/testing/test-report-4.png)
+
+### Test on multi-devices
+This app was tested on different devices and worked as expected. There is only a minor problem with mobile devices with the mock terminal that sometimes the previous value is not cleared at the input.
 ___
 ## Bugs
 **Bugs Identified and Resolved**
@@ -330,7 +333,9 @@ ___
 
 **Unfix Bugs**
 
-There are no known bugs to be fixed.
+* As mentioned in testing section on multi-devices that there is minor bug with the mock terminal for mobile devices. This is not a bug in the app but to do with the mock terminal itself. Also, this app is not intended to run on mobile devices so this problem has not been fixed.
+
+* It was noticed a problem when the app is running simultaneously on 2 devices and both trying to update the “leaderboard” worksheet at the same time. The problem is one can overwrite the other and caused incorrect update on the leader board. This bug has not been fixed at this stage as further research is required to apply exclusive access to Google Sheets.
 ___
 ## Deployment
 This project has been deployed in Heroku and use a mock terminal to run the program.
