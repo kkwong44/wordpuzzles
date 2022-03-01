@@ -12,6 +12,7 @@ from colorama import Fore, Style
 from colorama import init
 init()
 
+# Google IAM configuration and access Google Sheet
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -46,7 +47,6 @@ class ImportSheet:
             print(Fore.RED + msg)
             sys.exit()
         words_in_dict = sheet.get_all_records()
-
         return words_in_dict
 
     def display_dict(self, dicts, ranking):
@@ -117,7 +117,6 @@ class Grid:
         for x_cord in range(self.length):
             for y_cord in range(self.length):
                 base_grid[x_cord, y_cord] = random.choice(self.filler)
-
         return base_grid
 
     def display(self, input_grid):
@@ -202,6 +201,7 @@ class ModifyGrid:
         score = 0
         for attempt in range(3):
             if user == "Admin":
+                # Get answer from simulation
                 print(Fore.WHITE + "> Enter your answer here:")
                 answer = self.auto_answer()
                 print(answer)
